@@ -1,11 +1,13 @@
 package ua.goit.gojava;
 
-/**
- * Created by admin on 08.04.2016.
- */
+import java.awt.*;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
+        MainWindow mainWindow = new MainWindow("Calculator", new Dimension(600, 400));
+        mainWindow.init();
     }
 }
+
