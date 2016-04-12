@@ -1,4 +1,4 @@
-package ua.goit.gojava;
+package ua.goit.gojava.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,10 @@ import java.util.List;
 import static java.awt.GridBagConstraints.*;
 
 
-public class Keyboard extends Panel implements Observable {
+public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
-    private List<Observer> observers = new ArrayList<>();
+    private List<ua.goit.gojava.Observer> observers = new ArrayList<>();
+    String stringExpression = "";
     String operand = "";
 
 
@@ -34,6 +35,7 @@ public class Keyboard extends Panel implements Observable {
         JButton buttonCE = new JButton();
         buttonCE.setText("CE");
         add(buttonCE, new GridBagConstraints(4, 0, 4, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonCE.addActionListener(new ClearButtonActionListener());
 
         JButton button5 = new JButton();
         button5.setText("5");
@@ -123,20 +125,28 @@ public class Keyboard extends Panel implements Observable {
         }
     }
 
+    public class OperationButtonActionListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            stringExpression += operand;
+            operand="";
+            notifyObservers();
+        }
+    }
+
     public class ClearButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
                 case "C":
-                    operand = "0";
-                    notifyObservers();
                     operand = "";
+                    notifyObservers();
                     break;
                 case "CE":
-                    operand = "0";
-                    notifyObservers();
                     operand = "";
+                    notifyObservers();
                     break;
 
             }
@@ -154,18 +164,18 @@ public class Keyboard extends Panel implements Observable {
     }
 
     @Override
-    public void regObserver(Observer observer) {
+    public void regObserver(ua.goit.gojava.Observer observer) {
         observers.add(observer);
     }
 
     @Override
-    public void removeObserver(Observer observer) {
+    public void removeObserver(ua.goit.gojava.Observer observer) {
         observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (Observer observer : observers) {
+        for (ua.goit.gojava.Observer observer : observers) {
             observer.update(operand);
         }
     }

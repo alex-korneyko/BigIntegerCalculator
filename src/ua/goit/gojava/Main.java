@@ -1,5 +1,7 @@
 package ua.goit.gojava;
 
+import ua.goit.gojava.gui.MainWindow;
+
 import java.awt.*;
 
 public class Main {

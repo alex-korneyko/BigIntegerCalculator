@@ -1,4 +1,4 @@
-package ua.goit.gojava;
+package ua.goit.gojava.gui;
 
 import javax.swing.*;
 import java.awt.*;
