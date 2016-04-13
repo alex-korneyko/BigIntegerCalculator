@@ -1,4 +1,4 @@
-package ua.goit.gojava.arithmetic;
+package ua.goit.gojava.parser;
 
 import ua.goit.gojava.Observable;
 import ua.goit.gojava.Observer;
@@ -9,12 +9,15 @@ import ua.goit.gojava.expression.Expression;
  *
  * Created by ... on 12.04.2016.
  */
-public class BigCompute implements Observer, Observable {
+public class Parser implements Observer, Observable {
 
-    public static BigInteger compute(Expression expression){
+    public static Expression toBigInteger(String stringExpression){
 
-        return null;
+
+
+        return new Expression();
     }
+
 
     @Override
     public void regObserver(Observer observer) {
