@@ -6,12 +6,13 @@ import java.util.List;
 /**
  * @author Alex Korneyko, 2016
  * @version 1.0 12.04.2016
- *          Выражение, состоящее из обобщённых элементов,
+ *          Выражение, состоящее из обобщённых элементов (коллекция elementSet),
  *          которые по смыслу могут быть как большими целыми, так и операциями
  *          или другими символами математических формул
  */
 public class Expression {
 
+    //Коллекция, которая и является выражением
     public List<ExpressionElement> elementSet = new ArrayList<>();
 
 
@@ -21,7 +22,7 @@ public class Expression {
         String result = "";
 
         for (ExpressionElement element : elementSet) {
-            result += element.toString() + " ";
+            result += element.toString();
         }
 
         return result;

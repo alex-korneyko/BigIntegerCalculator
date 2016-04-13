@@ -5,5 +5,23 @@ package ua.goit.gojava.expression;
  */
 public enum ExpressionElementType {
 
-    BIG_INT, BIG_DECIMAL, BIG_FLOAT, PLUS, MINUS, MULTIPLY, DIVIDE, POWER
+    BIG_INT, BIG_DECIMAL, BIG_FLOAT, PLUS, MINUS, MULTIPLY, DIVIDE, POWER;
+
+    @Override
+    public String toString(){
+        switch (this){
+            case PLUS:
+                return "+";
+            case MINUS:
+                return "-";
+            case MULTIPLY:
+                return "*";
+            case DIVIDE:
+                return "/";
+            case POWER:
+                return "^";
+        }
+
+        return null;
+    }
 }

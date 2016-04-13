@@ -56,7 +56,11 @@ public class ExpressionElement implements Comparable<ExpressionElement> {
     @Override
     public ExpressionElement clone() {
 
-        return new ExpressionElement(new BigInteger(this.value.toString()));
+        if (this.elementType == BIG_INT) {
+            return new ExpressionElement(new BigInteger(this.value.toString()));
+        }
+
+        return new ExpressionElement(this.elementType);
     }
 
     @Override
