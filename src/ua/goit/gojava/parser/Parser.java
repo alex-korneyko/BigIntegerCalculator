@@ -8,7 +8,6 @@ import java.util.List;
 
 
 /**
- *
  * Created by ... on 12.04.2016.
  */
 public class Parser implements Observer, Observable {
@@ -26,7 +25,8 @@ public class Parser implements Observer, Observable {
      * В случае получения некорректной строки, должно сгенерироваться исключение IllegalArgumentException.
      * Варианты некорректных строк описаны в тестовом классе ParametrizedParserTest2,
      * все тесты должны пройти на "ОК"
-     *
+     * <p>
+     * Смотри диаграмму структуры коллекции выражения: Expression structure v1.0.jpg
      *
      * @param stringExpression текстовая строка
      * @return объект класса Expression
@@ -36,8 +36,6 @@ public class Parser implements Observer, Observable {
         Expression expression = new Expression();
 
         //Дальше код реализации метода
-
-
 
 
         //------------------------------

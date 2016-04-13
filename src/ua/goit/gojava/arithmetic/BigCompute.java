@@ -11,7 +11,17 @@ import ua.goit.gojava.expression.Expression;
  */
 public class BigCompute implements Observer, Observable {
 
-    public static BigInteger compute(Expression expression){
+    /**
+     * Принимает параметром объект Expression,
+     * который содержит коллекцию объектов ExpressionElement.
+     * Метод должен определить приоритетные операции, выполнить расчёт всего Expression,
+     * и вернуть результат как BigInteger.
+     * Смотри диаграмму структуры коллекции выражения: Expression structure v1.0.jpg
+     *
+     * @param expression
+     * @return
+     */
+    public static BigInteger compute(Expression expression) {
 
         return null;
     }
