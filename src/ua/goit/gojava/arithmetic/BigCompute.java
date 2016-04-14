@@ -21,7 +21,7 @@ public class BigCompute implements Observer, Observable {
      * @param expression
      * @return
      */
-    public static BigInteger compute(Expression expression) {
+    public BigInteger compute(Expression expression) {
 
         return null;
     }
