@@ -1,6 +1,5 @@
-package ua.goit.gojava.gui;
+package ua.goit.gojava.graphick;
 
-import ua.goit.gojava.*;
 import ua.goit.gojava.Observer;
 import ua.goit.gojava.parser.Parser;
 
@@ -197,8 +196,10 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            stringExpression = stringExpression.substring(0, stringExpression.length() - 1);
-            notifyObservers();
+            if (stringExpression.length() > 0) {
+                stringExpression = stringExpression.substring(0, stringExpression.length() - 1);
+                notifyObservers();
+            }
         }
     }
 
