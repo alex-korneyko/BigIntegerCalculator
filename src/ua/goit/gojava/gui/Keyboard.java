@@ -158,8 +158,6 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         public void actionPerformed(ActionEvent e) {
             stringExpression = "";
             notifyObservers();
-
-
         }
     }
 

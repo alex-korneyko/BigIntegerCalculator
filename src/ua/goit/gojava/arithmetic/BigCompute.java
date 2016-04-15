@@ -5,11 +5,17 @@ import ua.goit.gojava.Observer;
 import ua.goit.gojava.big.BigInteger;
 import ua.goit.gojava.expression.Expression;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * Created by ... on 12.04.2016.
  */
 public class BigCompute implements Observer, Observable {
+
+    List<Observer> observers = new ArrayList<>();
+    BigInteger result;
+    boolean error = false;
 
     /**
      * Принимает параметром объект Expression,
@@ -22,8 +28,9 @@ public class BigCompute implements Observer, Observable {
      * @return
      */
     public BigInteger compute(Expression expression) {
+        error = false;
 
-        return null;
+        return result;
     }
 
     @Override
@@ -39,10 +46,20 @@ public class BigCompute implements Observer, Observable {
     @Override
     public void notifyObservers() {
 
+        for (Observer observer : observers) {
+            observer.update(error ? "Error" : result.toString());
+        }
     }
 
     @Override
     public void update(Object o) {
 
+        try {
+            result = this.compute((Expression) o);
+        } catch (Exception e) {
+            error = true;
+        }
+
+        notifyObservers();
     }
 }

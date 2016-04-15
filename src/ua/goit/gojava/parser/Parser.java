@@ -2,7 +2,9 @@ package ua.goit.gojava.parser;
 
 import ua.goit.gojava.Observable;
 import ua.goit.gojava.Observer;
+import ua.goit.gojava.arithmetic.BigCompute;
 import ua.goit.gojava.expression.Expression;
+import ua.goit.gojava.gui.Screen;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
 public class Parser implements Observer, Observable {
 
     private List<Observer> observers;
+    Expression expression;
+    boolean error;
 
     /**
      * Метод должен из строки сгенерировать "выражение" (объект класса Expression).
@@ -31,9 +35,10 @@ public class Parser implements Observer, Observable {
      * @param stringExpression текстовая строка
      * @return объект класса Expression
      */
-    public Expression toBigInteger(String stringExpression) {
+    public Expression toBigInteger(String stringExpression) throws IllegalArgumentException {
 
-        Expression expression = new Expression();
+        expression = new Expression();
+        error = false;
 
         //Дальше код реализации метода
 
@@ -57,10 +62,28 @@ public class Parser implements Observer, Observable {
     @Override
     public void notifyObservers() {
 
+        for (Observer observer : observers) {
+            if (error) {
+                if (observer instanceof Screen) {
+                    observer.update("Error!");
+                }
+            } else {
+                if (observer instanceof BigCompute) {
+                    observer.update(expression);
+                }
+            }
+        }
     }
 
     @Override
     public void update(Object o) {
 
+        try {
+            expression = this.toBigInteger((String) o);
+        } catch (IllegalArgumentException e) {
+            error = true;
+        }
+
+        notifyObservers();
     }
 }
