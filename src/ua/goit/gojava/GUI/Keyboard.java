@@ -1,5 +1,9 @@
 package ua.goit.gojava.gui;
 
+import ua.goit.gojava.*;
+import ua.goit.gojava.Observer;
+import ua.goit.gojava.parser.Parser;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,9 +16,8 @@ import static java.awt.GridBagConstraints.*;
 
 public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
-    private List<ua.goit.gojava.Observer> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
     String stringExpression = "";
-    String operand = "";
 
 
     public void init() {
@@ -29,13 +32,19 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
         JButton buttonC = new JButton();
         buttonC.setText("C");
-        add(buttonC, new GridBagConstraints(0, 0, 4, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        add(buttonC, new GridBagConstraints(0, 0, 5, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonC.setForeground(Color.RED);
         buttonC.addActionListener(new ClearButtonActionListener());
 
-        JButton buttonCE = new JButton();
-        buttonCE.setText("CE");
-        add(buttonCE, new GridBagConstraints(4, 0, 4, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonCE.addActionListener(new ClearButtonActionListener());
+        JButton buttonRndInt = new JButton();
+        buttonRndInt.setText("Rnd Int");
+        add(buttonRndInt, new GridBagConstraints(5, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonRndInt.addActionListener(new RndButtonActionListener());
+
+        JButton buttonRndBigInt = new JButton();
+        buttonRndBigInt.setText("Rnd BigInt");
+        add(buttonRndBigInt, new GridBagConstraints(7, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonRndBigInt.addActionListener(new RndButtonActionListener());
 
         JButton button5 = new JButton();
         button5.setText("5");
@@ -65,14 +74,21 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         JButton buttonPlus = new JButton();
         buttonPlus.setText("+");
         add(buttonPlus, new GridBagConstraints(5, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonPlus.addActionListener(new OperationButtonActionListener());
 
         JButton buttonMultiply = new JButton();
         buttonMultiply.setText("*");
         add(buttonMultiply, new GridBagConstraints(6, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonMultiply.addActionListener(new OperationButtonActionListener());
+
+        JButton buttonPower = new JButton();
+        buttonPower.setText("^");
+        add(buttonPower, new GridBagConstraints(7, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonPower.addActionListener(new OperationButtonActionListener());
 
         JButton buttonBack = new JButton();
         buttonBack.setText("<<");
-        add(buttonBack, new GridBagConstraints(7, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        add(buttonBack, new GridBagConstraints(8, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonBack.addActionListener(new BackButtonActionListener());
 
         JButton button0 = new JButton();
@@ -103,34 +119,36 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         JButton buttonMinus = new JButton();
         buttonMinus.setText("-");
         add(buttonMinus, new GridBagConstraints(5, 2, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonMinus.addActionListener(new OperationButtonActionListener());
 
         JButton buttonDivide = new JButton();
         buttonDivide.setText("/");
         add(buttonDivide, new GridBagConstraints(6, 2, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonDivide.addActionListener(new OperationButtonActionListener());
 
         JButton buttonResult = new JButton();
         buttonResult.setText("=");
-        add(buttonResult, new GridBagConstraints(7, 2, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        add(buttonResult, new GridBagConstraints(7, 2, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonResult.addActionListener(new ResultButtonActionListener());
     }
 
     public class NumButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (operand.equals("") && e.getActionCommand().equals("0")) {
+            if (stringExpression.equals("") && e.getActionCommand().equals("0")) {
                 return;
             }
-            operand += e.getActionCommand();
+            stringExpression += e.getActionCommand();
             notifyObservers();
         }
     }
 
-    public class OperationButtonActionListener implements ActionListener{
+    public class OperationButtonActionListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            stringExpression += operand;
-            operand="";
+            stringExpression += e.getActionCommand();
             notifyObservers();
         }
     }
@@ -139,18 +157,39 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            switch (e.getActionCommand()) {
-                case "C":
-                    operand = "";
-                    notifyObservers();
-                    break;
-                case "CE":
-                    operand = "";
-                    notifyObservers();
-                    break;
+            stringExpression = "";
+            notifyObservers();
+
+
+        }
+    }
+
+    public class RndButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getActionCommand().equals("Rnd Int")) {
+
+            } else {
 
             }
 
+        }
+    }
+
+    public class ResultButtonActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (Observer observer : observers) {
+                if (observer instanceof Parser) {
+                    observer.update(stringExpression);
+                }
+            }
+
+            stringExpression = "";
+//            notifyObservers();
         }
     }
 
@@ -158,25 +197,27 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            operand = operand.substring(0, operand.length() - 1);
+            stringExpression = stringExpression.substring(0, stringExpression.length() - 1);
             notifyObservers();
         }
     }
 
     @Override
-    public void regObserver(ua.goit.gojava.Observer observer) {
+    public void regObserver(Observer observer) {
         observers.add(observer);
     }
 
     @Override
-    public void removeObserver(ua.goit.gojava.Observer observer) {
+    public void removeObserver(Observer observer) {
         observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (ua.goit.gojava.Observer observer : observers) {
-            observer.update(operand);
+        for (Observer observer : observers) {
+            if (observer instanceof Screen) {
+                observer.update(stringExpression);
+            }
         }
     }
 }

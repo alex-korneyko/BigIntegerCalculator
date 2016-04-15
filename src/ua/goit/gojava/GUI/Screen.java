@@ -8,6 +8,8 @@ import java.awt.*;
 public class Screen extends TextField implements Observer {
 
     public void init() {
+        setEditable(false);
+
         setText("0");
     }
 
