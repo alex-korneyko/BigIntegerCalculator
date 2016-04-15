@@ -1,7 +1,7 @@
 package ua.goit.gojava;
 
 import ua.goit.gojava.arithmetic.BigCompute;
-import ua.goit.gojava.graphick.MainWindow;
+import ua.goit.gojava.gui.MainWindow;
 import ua.goit.gojava.parser.Parser;
 
 import java.awt.*;

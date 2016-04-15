@@ -1,4 +1,4 @@
-package ua.goit.gojava.graphick;
+package ua.goit.gojava.gui;
 
 import ua.goit.gojava.Observer;
 import ua.goit.gojava.parser.Parser;
