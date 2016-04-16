@@ -5,36 +5,27 @@ package ua.goit.gojava.big;
  * Created by ... on 12.04.2016.
  */
 public class BigMath {
-
-    public static BigNumber plus (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger add(BigInteger x, BigInteger y){
+        return x.add(y);
     }
 
-    public static BigNumber minus (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger /*minus*/sub(BigInteger x, BigInteger y){
+        return x.subtract(y);
     }
 
-    public static BigNumber multiply (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger multiply(BigInteger x, BigInteger y){
+        return x.multiply(y);
     }
 
-    public static BigNumber divide (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger divide(BigInteger x, BigInteger y){
+        return x.divide(y);
     }
 
-    public static BigNumber power (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger power(BigInteger x, BigInteger y){
+        return x.pow(y);
     }
 
-    public static BigNumber modulo (BigNumber x, BigNumber y){
-
-        return null;
+    public static BigInteger modulo(BigInteger x, BigInteger y){
+        return x.mod(y);
     }
-
-
 }
