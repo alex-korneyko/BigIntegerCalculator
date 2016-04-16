@@ -17,7 +17,7 @@ import static ua.goit.gojava.expression.ExpressionElementType.*;
 public class ExpressionElement implements Comparable<ExpressionElement> {
 
     //Если этот элемент - число, то здесь его значение, если нет, то 0
-    final public BigInteger value;
+    public BigInteger value;
 
     //Тип элемента. Если число, то здесь BIG_INT, если операция, то PLUS, MINUS ...
     final public ExpressionElementType elementType;
