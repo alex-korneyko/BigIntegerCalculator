@@ -5,7 +5,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by admin on 12.04.2016.
+ * @author Alexandr Korneyko, 2016
+ * @version 1.0 16.04.2016
  */
 public class BigComputeTest {
 

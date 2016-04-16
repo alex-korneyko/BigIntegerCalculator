@@ -17,7 +17,7 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
     private List<Observer> observers = new ArrayList<>();
     String stringExpression = "";
-
+    boolean equallyPressed = false;
 
     public void init() {
         setLayout(new GridBagLayout());
@@ -179,14 +179,9 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            for (Observer observer : observers) {
-                if (observer instanceof Parser) {
-                    observer.update(stringExpression);
-                }
-            }
 
-            stringExpression = "";
-//            notifyObservers();
+            equallyPressed = true;
+            notifyObservers();
         }
     }
 
@@ -214,9 +209,17 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            if (observer instanceof Screen) {
-                observer.update(stringExpression);
+            if (equallyPressed) {
+                if (observer instanceof Parser) {
+                    observer.update(stringExpression);
+                    stringExpression="";
+                }
+            } else {
+                if (observer instanceof Screen) {
+                    observer.update(stringExpression);
+                }
             }
         }
+        equallyPressed = false;
     }
 }

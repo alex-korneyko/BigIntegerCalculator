@@ -14,15 +14,18 @@ public class Main {
         Parser parser = new Parser();
         BigCompute bigCompute = new BigCompute();
 
-        if(args.length ==0) {
-            MainWindow mainWindow = new MainWindow("Calculator", new Dimension(600, 400));
+        parser.regObserver(bigCompute);
+
+        if (args.length == 0) {
+            MainWindow mainWindow = new MainWindow("Calculator", new Dimension(600, 400), parser);
             mainWindow.init();
-        }else{
+            bigCompute.regObserver(mainWindow.screen);
+        } else {
             try {
                 String result = bigCompute.compute(parser.toBigInteger(Arrays.toString(args))).toString();
                 System.out.println(result);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Error!");
             }
         }
     }

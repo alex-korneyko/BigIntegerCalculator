@@ -1,4 +1,6 @@
-    import javax.swing.*;
+package ua.goit.gojava;
+
+import javax.swing.*;
     import java.awt.*;
     import java.awt.event.ActionEvent;
     import java.awt.event.ActionListener;

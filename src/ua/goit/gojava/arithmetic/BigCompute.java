@@ -27,20 +27,27 @@ public class BigCompute implements Observer, Observable {
      * @param expression
      * @return
      */
-    public BigInteger compute(Expression expression) {
+    public BigInteger compute(Expression expression) throws ArithmeticException {
+        result = new BigInteger("0");
         error = false;
 
+        //Дальше код реализации метода
+
+
+        //------------------------------
+
+        notifyObservers();
         return result;
     }
 
     @Override
     public void regObserver(Observer observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void removeObserver(Observer observer) {
-
+        observers.remove(observer);
     }
 
     @Override
@@ -56,7 +63,7 @@ public class BigCompute implements Observer, Observable {
 
         try {
             result = this.compute((Expression) o);
-        } catch (Exception e) {
+        } catch (ArithmeticException e) {
             error = true;
         }
 

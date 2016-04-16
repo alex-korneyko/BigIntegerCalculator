@@ -6,6 +6,7 @@ import ua.goit.gojava.arithmetic.BigCompute;
 import ua.goit.gojava.expression.Expression;
 import ua.goit.gojava.gui.Screen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class Parser implements Observer, Observable {
 
-    private List<Observer> observers;
+    private List<Observer> observers = new ArrayList<>();
     Expression expression;
     boolean error;
 

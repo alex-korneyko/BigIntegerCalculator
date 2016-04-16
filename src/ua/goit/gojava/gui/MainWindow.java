@@ -1,5 +1,7 @@
 package ua.goit.gojava.gui;
 
+import ua.goit.gojava.Observer;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,10 +11,11 @@ public class MainWindow extends JFrame {
     private String title;
     private Dimension dim;
 
-    private Screen screen = new Screen();
+    public Screen screen = new Screen();
     private Keyboard keyboard = new Keyboard();
 
-    public MainWindow(String title, Dimension dim) {
+    public MainWindow(String title, Dimension dim, Observer o) {
+        keyboard.regObserver(o);
         this.title = title;
         this.dim = dim;
     }
