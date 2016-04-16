@@ -37,6 +37,7 @@ public class BigCompute implements Observer, Observable {
         //------------------------------
 
         notifyObservers();
+        //return (new BigInteger("250")).add(new BigInteger("2"));
         return result;
     }
 
@@ -54,7 +55,7 @@ public class BigCompute implements Observer, Observable {
     public void notifyObservers() {
 
         for (Observer observer : observers) {
-            observer.update(error ? "Error" : result.toString());
+            observer.update(error ? "Error!" : result.toString());
         }
     }
 

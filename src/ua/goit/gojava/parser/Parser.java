@@ -44,6 +44,7 @@ public class Parser implements Observer, Observable {
         //Дальше код реализации метода
 
 
+
         //------------------------------
         notifyObservers();
         return expression;

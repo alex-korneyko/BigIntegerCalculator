@@ -11,15 +11,21 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
+        //Парсер
         Parser parser = new Parser();
+
+        //Калькулятор выражений произвольной длинны
         BigCompute bigCompute = new BigCompute();
 
+        //Добавление наблюдателя в Парсер.
+        //Как только Парсер отработает, он передаст результаты наблюдателю
         parser.regObserver(bigCompute);
 
         if (args.length == 0) {
             MainWindow mainWindow = new MainWindow("Calculator", new Dimension(600, 400), parser);
             mainWindow.init();
             bigCompute.regObserver(mainWindow.screen);
+            parser.regObserver(mainWindow.screen);
         } else {
             try {
                 String result = bigCompute.compute(parser.toBigInteger(Arrays.toString(args))).toString();
