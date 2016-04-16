@@ -37,15 +37,15 @@ public class BigCompute implements Observer, Observable {
         error = false;
 
         while (isOperationPriority(expression, 3)) {
-            doPowerOperation(expression);
+            doOperation(expression, 3);
         }
 
         while (isOperationPriority(expression, 2)) {
-            doMultiplyOrDivedeOperation(expression);
+            doOperation(expression, 2);
         }
 
         while (isOperationPriority(expression, 1)) {
-            doAddOrSubOperation(expression);
+            doOperation(expression, 1);
         }
 
         notifyObservers();
@@ -93,52 +93,34 @@ public class BigCompute implements Observer, Observable {
         return false;
     }
 
-    private Expression doPowerOperation(Expression expression) {
+    private Expression doOperation(Expression expression, int operationPriority) {
         for (int i = 1; i < expression.elementSet.size()-1; i++) {
-            if (expression.elementSet.get(i).operationPriority == 3) {
-                expression.elementSet.get(i-1).value =
-                        BigMath.power(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
-
-                expression.elementSet.remove(i);
-                expression.elementSet.remove(i);
-
-                return expression;
-            }
-        }
-
-        return expression;
-    }
-
-    private Expression doMultiplyOrDivedeOperation(Expression expression) {
-        for (int i = 1; i < expression.elementSet.size()-1; i++) {
-            if (expression.elementSet.get(i).operationPriority == 2) {
-                if (expression.elementSet.get(i).elementType == ExpressionElementType.MULTIPLY) {
+            if (expression.elementSet.get(i).operationPriority == operationPriority) {
+                if (operationPriority == 3) {
                     expression.elementSet.get(i-1).value =
-                            BigMath.multiply(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
-                } else {
-                    expression.elementSet.get(i-1).value =
-                            BigMath.divide(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                            BigMath.power(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
                 }
 
-                expression.elementSet.remove(i);
-                expression.elementSet.remove(i);
+                else if (operationPriority == 2) {
+                    if (expression.elementSet.get(i).elementType == ExpressionElementType.MULTIPLY) {
+                        expression.elementSet.get(i-1).value =
+                                BigMath.multiply(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    }
+                    else if (expression.elementSet.get(i).elementType == ExpressionElementType.DIVIDE){
+                        expression.elementSet.get(i-1).value =
+                                BigMath.divide(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    }
+                }
 
-                return expression;
-            }
-        }
-
-        return expression;
-    }
-
-    private Expression doAddOrSubOperation(Expression expression) {
-        for (int i = 1; i < expression.elementSet.size()-1; i++) {
-            if (expression.elementSet.get(i).operationPriority == 1) {
-                if (expression.elementSet.get(i).elementType == ExpressionElementType.PLUS) {
-                    expression.elementSet.get(i-1).value =
-                            BigMath.add(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
-                } else {
-                    expression.elementSet.get(i-1).value =
-                            BigMath.sub(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                else if (operationPriority == 1) {
+                    if (expression.elementSet.get(i).elementType == ExpressionElementType.PLUS) {
+                        expression.elementSet.get(i-1).value =
+                                BigMath.add(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    }
+                    else if (expression.elementSet.get(i).elementType == ExpressionElementType.MINUS){
+                        expression.elementSet.get(i-1).value =
+                                BigMath.sub(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    }
                 }
 
                 expression.elementSet.remove(i);
