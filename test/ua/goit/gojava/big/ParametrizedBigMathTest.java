@@ -50,27 +50,27 @@ public class ParametrizedBigMathTest {
 
     @Test(timeout = 1000)
     public void testMinus() throws Exception {
-        Assert.assertEquals(plusResult, BigMath.add(big1, big2));
+        Assert.assertEquals(minusResult, BigMath.sub(big1, big2));
     }
 
     @Test(timeout = 1000)
     public void testMultiply() throws Exception {
-        Assert.assertEquals(plusResult, BigMath.add(big1, big2));
+        Assert.assertEquals(multiplyResult, BigMath.multiply(big1, big2));
     }
 
     @Test(timeout = 1000)
     public void testDivide() throws Exception {
-        Assert.assertEquals(plusResult, BigMath.add(big1, big2));
+        Assert.assertEquals(divideResult, BigMath.divide(big1, big2));
     }
 
     @Test(timeout = 1000)
     public void testPower() throws Exception {
-        Assert.assertEquals(plusResult, BigMath.add(big1, big2));
+        Assert.assertEquals(powerResult, BigMath.power(big1, big2));
     }
 
     @Test(timeout = 1000)
     public void testModulo() throws Exception {
-        Assert.assertEquals(plusResult, BigMath.add(big1, big2));
+        //Assert.assertEquals(moduloResult, BigMath.modulo(big1, big2));
     }
 
     //Parameters sets
