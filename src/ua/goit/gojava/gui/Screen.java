@@ -1,5 +1,6 @@
 package ua.goit.gojava.gui;
 
+import javafx.scene.control.SelectionMode;
 import ua.goit.gojava.Observer;
 
 import java.awt.*;
@@ -11,6 +12,8 @@ public class Screen extends TextField implements Observer {
         setEditable(false);
 
         setText("0");
+
+        
     }
 
     @Override

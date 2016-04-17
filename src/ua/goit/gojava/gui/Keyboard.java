@@ -35,15 +35,20 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         buttonC.setForeground(Color.RED);
         buttonC.addActionListener(new ClearButtonActionListener());
 
-        JButton buttonRndInt = new JButton();
-        buttonRndInt.setText("Rnd Int");
-        add(buttonRndInt, new GridBagConstraints(5, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonRndInt.addActionListener(new RndButtonActionListener());
+        JButton buttonBack = new JButton();
+        buttonBack.setText(String.valueOf((char) 8592));
+        add(buttonBack, new GridBagConstraints(5, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonBack.addActionListener(new BackButtonActionListener());
 
-        JButton buttonRndBigInt = new JButton();
-        buttonRndBigInt.setText("Rnd BigInt");
-        add(buttonRndBigInt, new GridBagConstraints(7, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonRndBigInt.addActionListener(new RndButtonActionListener());
+        JButton buttonOpenParenthesis = new JButton();
+        buttonOpenParenthesis.setText("(");
+        add(buttonOpenParenthesis, new GridBagConstraints(7, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonOpenParenthesis.setEnabled(false);
+
+        JButton buttonCloseParenthesis = new JButton();
+        buttonCloseParenthesis.setText(")");
+        add(buttonCloseParenthesis, new GridBagConstraints(8, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonCloseParenthesis.setEnabled(false);
 
         JButton button5 = new JButton();
         button5.setText("5");
@@ -85,10 +90,10 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         add(buttonPower, new GridBagConstraints(7, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonPower.addActionListener(new OperationButtonActionListener());
 
-        JButton buttonBack = new JButton();
-        buttonBack.setText("<<");
-        add(buttonBack, new GridBagConstraints(8, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonBack.addActionListener(new BackButtonActionListener());
+        JButton buttonSqr = new JButton();
+        buttonSqr.setText("^2");
+        add(buttonSqr, new GridBagConstraints(8, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
+        buttonSqr.addActionListener(new SqrButtorActionListener());
 
         JButton button0 = new JButton();
         button0.setText("0");
@@ -161,20 +166,6 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         }
     }
 
-    public class RndButtonActionListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            if (e.getActionCommand().equals("Rnd Int")) {
-
-            } else {
-
-            }
-
-        }
-    }
-
     public class ResultButtonActionListener implements ActionListener {
 
         @Override
@@ -196,6 +187,15 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         }
     }
 
+    public class SqrButtorActionListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            stringExpression += "^2";
+            notifyObservers();
+        }
+    }
+
     @Override
     public void regObserver(Observer observer) {
         observers.add(observer);
@@ -212,7 +212,7 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
             if (equallyPressed) {
                 if (observer instanceof Parser) {
                     observer.update(stringExpression);
-                    stringExpression="";
+                    stringExpression = "";
                 }
             } else {
                 if (observer instanceof Screen) {

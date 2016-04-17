@@ -12,6 +12,7 @@ public class MainWindow extends JFrame {
     private Dimension dim;
 
     public Screen screen = new Screen();
+    private MenuBar menuBar = new MenuBar();
     private Keyboard keyboard = new Keyboard();
 
     public MainWindow(String title, Dimension dim, Observer o) {
@@ -24,11 +25,13 @@ public class MainWindow extends JFrame {
         setTitle(title);
         setSize(dim.width, dim.height);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setJMenuBar(menuBar);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
         setResizable(false);
         setVisible(true);
 
+        menuBar.init();
         screen.init();
         keyboard.init();
         keyboard.regObserver(screen);
