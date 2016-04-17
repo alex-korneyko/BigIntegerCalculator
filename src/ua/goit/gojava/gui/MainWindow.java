@@ -11,8 +11,9 @@ public class MainWindow extends JFrame {
     private String title;
     private Dimension dim;
 
+    private AboutWindow aboutWindow = new AboutWindow();
     public Screen screen = new Screen();
-    private MenuBar menuBar = new MenuBar();
+    private MenuBar menuBar = new MenuBar(aboutWindow);
     private Keyboard keyboard = new Keyboard();
 
     public MainWindow(String title, Dimension dim, Observer o) {

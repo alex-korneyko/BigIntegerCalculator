@@ -735,7 +735,7 @@ public class BigInteger extends BigNumber implements Comparable<BigInteger>{
             return "0";
         StringBuilder result = new StringBuilder();
         for (int i = digits.size() - 1; i >= 0; i--) {
-            if (i == digits.size() - 1 && digits.get(i) != 0) {
+            if (i == digits.size() - 1 /*&& digits.get(i) != 0*/) {
                 result.append(String.format("%d", digits.get(i)));
             } else {
                 result.append(String.format("%0" + BASE_LENGTH + "d", digits.get(i)));

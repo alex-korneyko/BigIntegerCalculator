@@ -12,8 +12,6 @@ public class Screen extends TextField implements Observer {
         setEditable(false);
 
         setText("0");
-
-        
     }
 
     @Override

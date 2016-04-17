@@ -3,7 +3,10 @@ package ua.goit.gojava.parser;
 import ua.goit.gojava.Observable;
 import ua.goit.gojava.Observer;
 import ua.goit.gojava.arithmetic.BigCompute;
+import ua.goit.gojava.big.BigInteger;
 import ua.goit.gojava.expression.Expression;
+import ua.goit.gojava.expression.ExpressionElement;
+import ua.goit.gojava.expression.ExpressionElementType;
 import ua.goit.gojava.gui.Screen;
 
 import java.util.ArrayList;

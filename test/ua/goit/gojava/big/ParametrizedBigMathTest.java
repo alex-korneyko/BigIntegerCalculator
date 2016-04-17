@@ -70,7 +70,7 @@ public class ParametrizedBigMathTest {
 
     @Test(timeout = 1000)
     public void testModulo() throws Exception {
-        //Assert.assertEquals(moduloResult, BigMath.modulo(big1, big2));
+        Assert.assertEquals(moduloResult.toString(), BigMath.modulo(big1, big2).toString());
     }
 
     //Parameters sets

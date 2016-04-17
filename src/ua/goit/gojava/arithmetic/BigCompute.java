@@ -48,9 +48,10 @@ public class BigCompute implements Observer, Observable {
             doOperation(expression, 1);
         }
 
+        result = expression.elementSet.get(0).value;
         notifyObservers();
 
-        return expression.elementSet.get(0).value;
+        return result;
         //return (new BigInteger("250")).add(new BigInteger("2"));
         //return result;
     }
