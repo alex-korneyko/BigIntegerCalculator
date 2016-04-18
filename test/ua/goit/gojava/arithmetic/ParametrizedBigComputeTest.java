@@ -43,9 +43,9 @@ public class ParametrizedBigComputeTest {
     }
 
     //region parametersSet
-    private static ExpressionElement int1 = new ExpressionElement(new BigInteger("2"));
-    private static ExpressionElement int2 = new ExpressionElement(new BigInteger("250"));
-    private static ExpressionElement int3 = new ExpressionElement(new BigInteger("32768"));
+    final private static ExpressionElement int1 = new ExpressionElement(new BigInteger("2"));
+    final private static ExpressionElement int2 = new ExpressionElement(new BigInteger("250"));
+    final private static ExpressionElement int3 = new ExpressionElement(new BigInteger("32768"));
 
     private static ExpressionElement big1 = new ExpressionElement(
             new BigInteger("12345678912345678912345678901234567891234567891234567890"));
@@ -69,7 +69,7 @@ public class ParametrizedBigComputeTest {
             }}, new BigInteger("252")},
 
             {new Expression() {{
-                elementSet.add(int1);
+                elementSet.add(new ExpressionElement(new BigInteger("2")));
                 elementSet.add(multiply);
                 elementSet.add(int2);
             }}, new BigInteger("500")},
@@ -81,7 +81,8 @@ public class ParametrizedBigComputeTest {
             }}, new BigInteger("12345690910000570811095788862555038109432028111135782469135780")},
 
             {new Expression() {{
-                elementSet.add(big1);
+                elementSet.add(new ExpressionElement(
+                        new BigInteger("12345678912345678912345678901234567891234567891234567890")));
                 elementSet.add(multiply);
                 elementSet.add(big2);
             }}, new BigInteger("152415783510143975239647487220776499128343241575546199885931476504109753827778895307058798442637686942262075019052100")},
@@ -103,24 +104,24 @@ public class ParametrizedBigComputeTest {
             //Many operands parameters sets
             //250+32768*2
             {new Expression() {{
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger("250")));
                 elementSet.add(plus);
-                elementSet.add(int3);
+                elementSet.add(new ExpressionElement(new BigInteger("32768")));
                 elementSet.add(multiply);
-                elementSet.add(int1);
+                elementSet.add(new ExpressionElement(new BigInteger("2")));
             }}, new BigInteger("65786")},
 
             //250+32768*2-250^2
             {new Expression() {{
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger("250")));
                 elementSet.add(plus);
-                elementSet.add(int3);
+                elementSet.add(new ExpressionElement(new BigInteger("32768")));
                 elementSet.add(multiply);
-                elementSet.add(int1);
+                elementSet.add(new ExpressionElement(new BigInteger("2")));
                 elementSet.add(minus);
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger("250")));
                 elementSet.add(power);
-                elementSet.add(int1);
+                elementSet.add(new ExpressionElement(new BigInteger("2")));
             }}, new BigInteger("3286")}
     };
     //endregion
