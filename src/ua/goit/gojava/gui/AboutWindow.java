@@ -20,8 +20,6 @@ public class AboutWindow extends JFrame {
         setVisible(false);
         setUndecorated(true);
 
-        aboutInfo();
-
         add(new JButton("Ok"){{
             addActionListener(new ActionListener() {
                 @Override
@@ -41,10 +39,6 @@ public class AboutWindow extends JFrame {
 
     public void hideAbout(){
         setVisible(false);
-    }
-
-    private void aboutInfo(){
-
     }
 
 }

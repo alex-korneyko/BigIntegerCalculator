@@ -9,30 +9,19 @@ import java.awt.event.ActionListener;
  * Created by admin on 16.04.2016.
  */
 public class MenuBar extends JMenuBar {
+    private AboutWindow aboutWindow = new AboutWindow();
 
-    AboutWindow aboutWindow;
+    public MenuBar(){
+        JMenu menuHelp = new JMenu("Help");
+        JMenuItem helpMenuItemAbout = new JMenuItem("About");
+        menuHelp.add(helpMenuItemAbout);
 
-    JMenu menuFile = new JMenu("File");
-    JMenu menuHelp = new JMenu("Help");
-
-    JMenuItem fileMenuItemExit = new JMenuItem("Exit");
-
-    JMenuItem helpMenuItemAbout = new JMenuItem("About");
-
-    public MenuBar(AboutWindow aboutWindow) {
-        this.aboutWindow = aboutWindow;
-    }
-
-    public void init(){
+        JMenu menuFile = new JMenu("File");
+        JMenuItem fileMenuItemExit = new JMenuItem("Exit");
+        menuFile.add(fileMenuItemExit);
 
         this.add(menuFile);
         this.add(menuHelp);
-
-        menuFile.add(fileMenuItemExit);
-
-        menuHelp.add(helpMenuItemAbout);
-
-
 
         fileMenuItemExit.addActionListener(new ActionListener() {
             @Override

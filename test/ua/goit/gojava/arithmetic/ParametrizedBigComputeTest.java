@@ -15,7 +15,7 @@ import static ua.goit.gojava.expression.ExpressionElementType.*;
 
 /**
  * @author Alexandr Korneyko, 2016
- * @version 1.0 16.04.2016
+ * @version 1.1 18.04.2016
  */
 @RunWith(value = Parameterized.class)
 public class ParametrizedBigComputeTest {
@@ -43,85 +43,88 @@ public class ParametrizedBigComputeTest {
     }
 
     //region parametersSet
-    final private static ExpressionElement int1 = new ExpressionElement(new BigInteger("2"));
-    final private static ExpressionElement int2 = new ExpressionElement(new BigInteger("250"));
-    final private static ExpressionElement int3 = new ExpressionElement(new BigInteger("32768"));
 
-    private static ExpressionElement big1 = new ExpressionElement(
-            new BigInteger("12345678912345678912345678901234567891234567891234567890"));
-    private static ExpressionElement big2 = new ExpressionElement(
-            new BigInteger("12345678564321658465416876516876136874864136876567891234567890"));
-    private static ExpressionElement big3 = new ExpressionElement(new BigInteger("2000000000000000"));
+    private static final String INT1 = "2";
+    private static final String INT2 = "250";
+    private static final String INT3 = "32768";
 
-    private static ExpressionElement plus = new ExpressionElement(PLUS);
-    private static ExpressionElement minus = new ExpressionElement(MINUS);
-    private static ExpressionElement multiply = new ExpressionElement(MULTIPLY);
-    private static ExpressionElement divide = new ExpressionElement(DIVIDE);
-    private static ExpressionElement power = new ExpressionElement(POWER);
+    private static final String BIG1 = "12345678912345678912345678901234567891234567891234567890";
+    private static final String BIG2 = "12345678564321658465416876516876136874864136876567891234567890";
+    private static final String BIG3 = "2000000000000000";
+
+    private static final ExpressionElement plus = new ExpressionElement(PLUS);
+    private static final ExpressionElement minus = new ExpressionElement(MINUS);
+    private static final ExpressionElement multiply = new ExpressionElement(MULTIPLY);
+    private static final ExpressionElement divide = new ExpressionElement(DIVIDE);
+    private static final ExpressionElement power = new ExpressionElement(POWER);
 
 
     private static Object[][] parametersSet = new Object[][]{
 
             {new Expression() {{
-                elementSet.add(int1);
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
                 elementSet.add(plus);
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
             }}, new BigInteger("252")},
 
             {new Expression() {{
-                elementSet.add(new ExpressionElement(new BigInteger("2")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
                 elementSet.add(multiply);
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
             }}, new BigInteger("500")},
 
             {new Expression() {{
-                elementSet.add(big1);
+                elementSet.add(new ExpressionElement(new BigInteger(BIG1)));
                 elementSet.add(plus);
-                elementSet.add(big2);
+                elementSet.add(new ExpressionElement(new BigInteger(BIG2)));
             }}, new BigInteger("12345690910000570811095788862555038109432028111135782469135780")},
 
             {new Expression() {{
                 elementSet.add(new ExpressionElement(
                         new BigInteger("12345678912345678912345678901234567891234567891234567890")));
                 elementSet.add(multiply);
-                elementSet.add(big2);
-            }}, new BigInteger("152415783510143975239647487220776499128343241575546199885931476504109753827778895307058798442637686942262075019052100")},
+                elementSet.add(new ExpressionElement(new BigInteger(BIG2)));
+            }}, new BigInteger("1524157835101439752396474872207764991283432415755461998859314765" +
+                    "04109753827778895307058798442637686942262075019052100")},
 
             {new Expression() {{
-                elementSet.add(big2);
+                elementSet.add(new ExpressionElement(new BigInteger(BIG2)));
                 elementSet.add(divide);
-                elementSet.add(big3);
+                elementSet.add(new ExpressionElement(new BigInteger(BIG3)));
             }}, new BigInteger("6172839282160829232708438258438068437432068438")},
 
             {new Expression() {{
-                elementSet.add(big3);
+                elementSet.add(new ExpressionElement(new BigInteger(BIG3)));
                 elementSet.add(power);
-                elementSet.add(int2);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
             }}, new BigInteger("819200000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000000000000000" +
                     "00000000000000000000000000000000000000000000000000000000000000")},
 
             //Many operands parameters sets
-            //250+32768*2
+            //250+32768*2=65786
             {new Expression() {{
-                elementSet.add(new ExpressionElement(new BigInteger("250")));
+
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
                 elementSet.add(plus);
-                elementSet.add(new ExpressionElement(new BigInteger("32768")));
+
+                elementSet.add(new ExpressionElement(new BigInteger(INT3)));
                 elementSet.add(multiply);
-                elementSet.add(new ExpressionElement(new BigInteger("2")));
+
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
             }}, new BigInteger("65786")},
 
-            //250+32768*2-250^2
+            //250+32768*2-250^2=3286
             {new Expression() {{
-                elementSet.add(new ExpressionElement(new BigInteger("250")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
                 elementSet.add(plus);
-                elementSet.add(new ExpressionElement(new BigInteger("32768")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT3)));
                 elementSet.add(multiply);
-                elementSet.add(new ExpressionElement(new BigInteger("2")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
                 elementSet.add(minus);
-                elementSet.add(new ExpressionElement(new BigInteger("250")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
                 elementSet.add(power);
-                elementSet.add(new ExpressionElement(new BigInteger("2")));
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
             }}, new BigInteger("3286")}
     };
     //endregion

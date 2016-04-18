@@ -1,17 +1,16 @@
 package ua.goit.gojava.gui;
 
-import javafx.scene.control.SelectionMode;
 import ua.goit.gojava.Observer;
 
-import java.awt.*;
+import javax.swing.*;
 
 
-public class Screen extends TextField implements Observer {
+public class Screen extends JTextField implements Observer {
 
-    public void init() {
+    public Screen() {
         setEditable(false);
-
         setText("0");
+        setHorizontalAlignment(RIGHT);
     }
 
     @Override

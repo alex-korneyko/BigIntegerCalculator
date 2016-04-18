@@ -46,9 +46,7 @@ public class Parser implements Observer, Observable {
 
         //Дальше код реализации метода
 
-        expression.elementSet.add(new ExpressionElement(new BigInteger("2")));
-        expression.elementSet.add(new ExpressionElement(ExpressionElementType.MULTIPLY));
-        expression.elementSet.add(new ExpressionElement(new BigInteger("250")));
+
 
         //------------------------------
         notifyObservers();

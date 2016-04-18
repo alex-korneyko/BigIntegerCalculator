@@ -23,9 +23,8 @@ public class Main {
 
         if (args.length == 0) {
             MainWindow mainWindow = new MainWindow("Calculator", new Dimension(600, 400), parser);
-            mainWindow.init();
-            bigCompute.regObserver(mainWindow.screen);
-            parser.regObserver(mainWindow.screen);
+            bigCompute.regObserver(mainWindow.getScreen());
+            parser.regObserver(mainWindow.getScreen());
         } else {
             try {
                 String result = bigCompute.compute(parser.toBigInteger(Arrays.toString(args))).toString();

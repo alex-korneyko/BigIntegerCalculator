@@ -1,6 +1,7 @@
 package ua.goit.gojava.gui;
 
 import ua.goit.gojava.Observer;
+import ua.goit.gojava.Observable;
 import ua.goit.gojava.parser.Parser;
 
 import javax.swing.*;
@@ -13,13 +14,13 @@ import java.util.List;
 import static java.awt.GridBagConstraints.*;
 
 
-public class Keyboard extends Panel implements ua.goit.gojava.Observable {
+public class Keyboard extends Panel implements Observable {
 
     private List<Observer> observers = new ArrayList<>();
     String stringExpression = "";
     boolean equallyPressed = false;
 
-    public void init() {
+    public  Keyboard() {
         setLayout(new GridBagLayout());
         setVisible(true);
 
@@ -40,13 +41,11 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         add(buttonBack, new GridBagConstraints(5, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonBack.addActionListener(new BackButtonActionListener());
 
-        JButton buttonOpenParenthesis = new JButton();
-        buttonOpenParenthesis.setText("(");
+        JButton buttonOpenParenthesis = new JButton("(");
         add(buttonOpenParenthesis, new GridBagConstraints(7, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonOpenParenthesis.setEnabled(false);
 
-        JButton buttonCloseParenthesis = new JButton();
-        buttonCloseParenthesis.setText(")");
+        JButton buttonCloseParenthesis = new JButton(")");
         add(buttonCloseParenthesis, new GridBagConstraints(8, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonCloseParenthesis.setEnabled(false);
 
@@ -93,7 +92,7 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
         JButton buttonSqr = new JButton();
         buttonSqr.setText("^2");
         add(buttonSqr, new GridBagConstraints(8, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonSqr.addActionListener(new SqrButtorActionListener());
+        buttonSqr.addActionListener(new OperationButtonActionListener());
 
         JButton button0 = new JButton();
         button0.setText("0");
@@ -184,15 +183,6 @@ public class Keyboard extends Panel implements ua.goit.gojava.Observable {
                 stringExpression = stringExpression.substring(0, stringExpression.length() - 1);
                 notifyObservers();
             }
-        }
-    }
-
-    public class SqrButtorActionListener implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            stringExpression += "^2";
-            notifyObservers();
         }
     }
 
