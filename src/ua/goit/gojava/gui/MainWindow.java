@@ -16,6 +16,9 @@ public class MainWindow extends JFrame {
         setTitle(title);
         setSize(dim.width, dim.height);
 
+        JScrollPane scrollPane = new JScrollPane(screen, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         MenuBar menuBar = new MenuBar();
         setJMenuBar(menuBar);
@@ -26,7 +29,7 @@ public class MainWindow extends JFrame {
 
         keyboard.regObserver(screen);
 
-        add(screen, new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.NORTH,
+        add(scrollPane, new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.NORTH,
                 GridBagConstraints.HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         add(keyboard, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.NORTH,
                 GridBagConstraints.HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
@@ -34,7 +37,7 @@ public class MainWindow extends JFrame {
         pack();
     }
 
-    public Observer getScreen(){
+    public Observer getScreen() {
         return screen;
     }
 }

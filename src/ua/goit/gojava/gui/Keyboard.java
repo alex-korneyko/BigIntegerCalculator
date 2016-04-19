@@ -14,7 +14,7 @@ import java.util.List;
 import static java.awt.GridBagConstraints.*;
 
 
-public class Keyboard extends Panel implements Observable {
+public class Keyboard extends JPanel implements Observable {
 
     private List<Observer> observers = new ArrayList<>();
     String stringExpression = "";
@@ -30,67 +30,56 @@ public class Keyboard extends Panel implements Observable {
 
     private void createKeys() {
 
-        JButton buttonC = new JButton();
-        buttonC.setText("C");
+        JButton buttonC = new JButton("C");
         add(buttonC, new GridBagConstraints(0, 0, 5, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonC.setForeground(Color.RED);
         buttonC.addActionListener(new ClearButtonActionListener());
 
-        JButton buttonBack = new JButton();
-        buttonBack.setText(String.valueOf((char) 8592));
+        JButton buttonBack = new JButton(String.valueOf((char) 8592));
         add(buttonBack, new GridBagConstraints(5, 0, 2, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonBack.addActionListener(new BackButtonActionListener());
 
         JButton buttonOpenParenthesis = new JButton("(");
         add(buttonOpenParenthesis, new GridBagConstraints(7, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonOpenParenthesis.setEnabled(false);
+        buttonOpenParenthesis.addActionListener(new OperationButtonActionListener());
 
         JButton buttonCloseParenthesis = new JButton(")");
         add(buttonCloseParenthesis, new GridBagConstraints(8, 0, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
-        buttonCloseParenthesis.setEnabled(false);
+        buttonCloseParenthesis.addActionListener(new OperationButtonActionListener());
 
-        JButton button5 = new JButton();
-        button5.setText("5");
+        JButton button5 = new JButton("5");
         add(button5, new GridBagConstraints(0, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         button5.addActionListener(new NumButtonActionListener());
 
-        JButton button6 = new JButton();
-        button6.setText("6");
+        JButton button6 = new JButton("6");
         add(button6, new GridBagConstraints(1, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         button6.addActionListener(new NumButtonActionListener());
 
-        JButton button7 = new JButton();
-        button7.setText("7");
+        JButton button7 = new JButton("7");
         add(button7, new GridBagConstraints(2, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         button7.addActionListener(new NumButtonActionListener());
 
-        JButton button8 = new JButton();
-        button8.setText("8");
+        JButton button8 = new JButton("8");
         add(button8, new GridBagConstraints(3, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         button8.addActionListener(new NumButtonActionListener());
 
-        JButton button9 = new JButton();
-        button9.setText("9");
+        JButton button9 = new JButton("9");
         add(button9, new GridBagConstraints(4, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         button9.addActionListener(new NumButtonActionListener());
 
-        JButton buttonPlus = new JButton();
-        buttonPlus.setText("+");
+        JButton buttonPlus = new JButton("+");
         add(buttonPlus, new GridBagConstraints(5, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonPlus.addActionListener(new OperationButtonActionListener());
 
-        JButton buttonMultiply = new JButton();
-        buttonMultiply.setText("*");
+        JButton buttonMultiply = new JButton("*");
         add(buttonMultiply, new GridBagConstraints(6, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonMultiply.addActionListener(new OperationButtonActionListener());
 
-        JButton buttonPower = new JButton();
-        buttonPower.setText("^");
+        JButton buttonPower = new JButton("^");
         add(buttonPower, new GridBagConstraints(7, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonPower.addActionListener(new OperationButtonActionListener());
 
-        JButton buttonSqr = new JButton();
-        buttonSqr.setText("^2");
+        JButton buttonSqr = new JButton("^2");
         add(buttonSqr, new GridBagConstraints(8, 1, 1, 1, 1, 1, NORTH, HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
         buttonSqr.addActionListener(new OperationButtonActionListener());
 
