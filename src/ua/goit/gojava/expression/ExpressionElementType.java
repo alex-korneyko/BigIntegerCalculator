@@ -5,7 +5,7 @@ package ua.goit.gojava.expression;
  */
 public enum ExpressionElementType {
 
-    BIG_INT, BIG_DECIMAL, BIG_FLOAT, PLUS, MINUS, MULTIPLY, DIVIDE, POWER;
+    BIG_INT, BIG_DECIMAL, BIG_FLOAT, PLUS, MINUS, MULTIPLY, DIVIDE, POWER, OPEN_PARENTHESIS, CLOSE_PARENTHESIS;
 
     @Override
     public String toString(){

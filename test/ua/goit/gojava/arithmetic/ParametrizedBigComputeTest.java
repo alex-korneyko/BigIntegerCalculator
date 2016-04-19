@@ -57,7 +57,8 @@ public class ParametrizedBigComputeTest {
     private static final ExpressionElement multiply = new ExpressionElement(MULTIPLY);
     private static final ExpressionElement divide = new ExpressionElement(DIVIDE);
     private static final ExpressionElement power = new ExpressionElement(POWER);
-
+    private static final ExpressionElement openParenthesis = new ExpressionElement(OPEN_PARENTHESIS);
+    private static final ExpressionElement closeParenthesis = new ExpressionElement(CLOSE_PARENTHESIS);
 
     private static Object[][] parametersSet = new Object[][]{
 
@@ -131,7 +132,40 @@ public class ParametrizedBigComputeTest {
                 elementSet.add(new ExpressionElement(new BigInteger(INT2)));
                 elementSet.add(power);
                 elementSet.add(new ExpressionElement(new BigInteger(INT1)));
-            }}, new BigInteger("3286")}
+            }}, new BigInteger("3286")},
+
+            //Parentheses
+            //One pair
+            // 2*(250+32768)/250 = 264
+            {new Expression() {{
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
+                elementSet.add(multiply);
+                elementSet.add(openParenthesis);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
+                elementSet.add(plus);
+                elementSet.add(new ExpressionElement(new BigInteger(INT3)));
+                elementSet.add(closeParenthesis);
+                elementSet.add(divide);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
+            }}, new BigInteger("264")},
+
+            //Two pair
+            //2*(250*(32768+2))/250 = 65540
+            {new Expression() {{
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
+                elementSet.add(multiply);
+                elementSet.add(openParenthesis);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
+                elementSet.add(multiply);
+                elementSet.add(openParenthesis);
+                elementSet.add(new ExpressionElement(new BigInteger(INT3)));
+                elementSet.add(plus);
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
+                elementSet.add(closeParenthesis);
+                elementSet.add(closeParenthesis);
+                elementSet.add(divide);
+                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
+            }}, new BigInteger("65540")},
     };
     //endregion
 }
