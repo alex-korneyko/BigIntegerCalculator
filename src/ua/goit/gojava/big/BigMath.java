@@ -9,7 +9,7 @@ public class BigMath {
         return x.add(y);
     }
 
-    public static BigInteger /*minus*/sub(BigInteger x, BigInteger y){
+    public static BigInteger sub(BigInteger x, BigInteger y){
         return x.subtract(y);
     }
 

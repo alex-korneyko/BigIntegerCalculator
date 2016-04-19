@@ -27,6 +27,9 @@ public class BigCompute implements Observer, Observable {
      * и вернуть результат как BigInteger.
      * Смотри диаграмму структуры коллекции выражения: Expression structure v1.0.jpg
      *
+     * Метод поочереди проходит коллекцию и ищет обьекты с нужными приоритетами (от 3 до 1)
+     * когда находит нужный приоритет делает операцию и удаляет два бьекта, результат записывается в первый
+     * a+b  --- результат запишется в *a*, *+b* удалится
      * @param expression
      * @return
      */
@@ -124,7 +127,7 @@ public class BigCompute implements Observer, Observable {
                     }
                 }
 
-                expression.elementSet.remove(i);
+                expression.elementSet.remove(i+1);
                 expression.elementSet.remove(i);
 
                 return expression;
