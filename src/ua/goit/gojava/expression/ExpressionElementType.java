@@ -20,6 +20,10 @@ public enum ExpressionElementType {
                 return "/";
             case POWER:
                 return "^";
+            case OPEN_PARENTHESIS:
+                return "(";
+            case CLOSE_PARENTHESIS:
+                return ")";
         }
 
         return null;

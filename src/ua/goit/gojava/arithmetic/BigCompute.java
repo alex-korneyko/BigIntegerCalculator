@@ -55,38 +55,6 @@ public class BigCompute implements Observer, Observable {
         notifyObservers();
 
         return result;
-        //return (new BigInteger("250")).add(new BigInteger("2"));
-        //return result;
-    }
-
-    @Override
-    public void regObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-
-        for (Observer observer : observers) {
-            observer.update(error ? "Error!" : result.toString());
-        }
-    }
-
-    @Override
-    public void update(Object o) {
-
-        try {
-            result = this.compute((Expression) o);
-        } catch (ArithmeticException e) {
-            error = true;
-        }
-
-        notifyObservers();
     }
 
     private boolean isOperationPriority(Expression expression, int operationPriority) {
@@ -135,5 +103,35 @@ public class BigCompute implements Observer, Observable {
         }
 
         return expression;
+    }
+
+    @Override
+    public void regObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+
+        for (Observer observer : observers) {
+            observer.update(error ? "Error!" : result.toString());
+        }
+    }
+
+    @Override
+    public void update(Object o) {
+
+        try {
+            result = this.compute((Expression) o);
+        } catch (ArithmeticException e) {
+            error = true;
+        }
+
+        notifyObservers();
     }
 }

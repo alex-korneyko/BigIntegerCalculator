@@ -81,6 +81,12 @@ public class ParametrizedBigComputeTest {
             }}, new BigInteger("500")},
 
             {new Expression() {{
+                elementSet.add(new ExpressionElement(new BigInteger("2")));
+                elementSet.add(power);
+                elementSet.add(new ExpressionElement(new BigInteger("8")));
+            }}, new BigInteger("256")},
+
+            {new Expression() {{
                 elementSet.add(new ExpressionElement(new BigInteger(BIG1)));
                 elementSet.add(plus);
                 elementSet.add(new ExpressionElement(new BigInteger(BIG2)));

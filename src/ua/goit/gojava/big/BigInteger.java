@@ -175,7 +175,7 @@ public class BigInteger extends BigNumber implements Comparable<BigInteger>{
             return a.multiply(_pow(a, n.subtract(1)));
         } else {
             BigInteger b = _pow(a, n.divide(2));
-            return a.multiply(b);
+            return b.multiply(b);
         }
     }
 
@@ -632,7 +632,7 @@ public class BigInteger extends BigNumber implements Comparable<BigInteger>{
         }
         BigInteger result = new BigInteger(this);
         while (a > 1) {
-            result = result._multiply(result);
+            result = result._multiply(this);
             a--;
         }
         return result;
