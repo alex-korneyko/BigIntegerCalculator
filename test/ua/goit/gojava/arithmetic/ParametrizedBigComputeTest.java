@@ -109,10 +109,8 @@ public class ParametrizedBigComputeTest {
             {new Expression() {{
                 elementSet.add(new ExpressionElement(new BigInteger(BIG3)));
                 elementSet.add(power);
-                elementSet.add(new ExpressionElement(new BigInteger(INT2)));
-            }}, new BigInteger("819200000000000000000000000000000000000000000000000000000000000" +
-                    "00000000000000000000000000000000000000000000000000000000000000000000000000" +
-                    "00000000000000000000000000000000000000000000000000000000000000")},
+                elementSet.add(new ExpressionElement(new BigInteger(INT1)));
+            }}, new BigInteger("4000000000000000000000000000000")},
 
             //Many operands parameters sets
             //250+32768*2=65786
