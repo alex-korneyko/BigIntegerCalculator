@@ -9,8 +9,11 @@ import ua.goit.gojava.expression.ExpressionElement;
 import ua.goit.gojava.expression.ExpressionElementType;
 import ua.goit.gojava.gui.Screen;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ua.goit.gojava.expression.ExpressionElementType.*;
 
 
 /**
@@ -41,16 +44,103 @@ public class Parser implements Observer, Observable {
      */
     public Expression toBigInteger(String stringExpression) throws IllegalArgumentException {
 
+        if (stringExpression == null || stringExpression.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+
         expression = new Expression();
+        char[] charExpression = stringExpression.toCharArray();
         error = false;
 
         //Дальше код реализации метода
 
+        fullConvert(stringExpression);
 
+        checkExpression(expression);
 
         //------------------------------
         notifyObservers();
         return expression;
+    }
+
+    private void fullConvert(String strExpression) {
+        char[] charExpr = strExpression.toCharArray();
+        String stringElement = "";
+
+        for (char aCharExpr : charExpr) {
+            if (aCharExpr >= 48 && aCharExpr <= 57) {
+                stringElement += aCharExpr;
+            }
+
+            if ((aCharExpr >= 33 && aCharExpr <= 47)
+                    || (aCharExpr >= 58 && aCharExpr <= 126)) {
+                if (!stringElement.isEmpty()) {
+                    expression.elementSet.add(new ExpressionElement(new BigInteger(stringElement)));
+                    stringElement = "";
+                }
+
+                switch (aCharExpr) {
+                    case '+':
+                        expression.elementSet.add(new ExpressionElement(PLUS));
+                        break;
+                    case '-':
+                        expression.elementSet.add(new ExpressionElement(MINUS));
+                        break;
+                    case '*':
+                        expression.elementSet.add(new ExpressionElement(MULTIPLY));
+                        break;
+                    case '/':
+                        expression.elementSet.add(new ExpressionElement(DIVIDE));
+                        break;
+                    case '^':
+                        expression.elementSet.add(new ExpressionElement(POWER));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Unknown operation");
+                }
+            }
+        }
+
+        if (!stringElement.isEmpty()) {
+            expression.elementSet.add(new ExpressionElement(new BigInteger(stringElement)));
+        }
+    }
+
+    private void checkExpression(Expression chkExpr) {
+        List<ExpressionElement> elementSet = chkExpr.elementSet;
+
+        //Проверка на отрицательность первого числа в выражении
+        if (elementSet.get(0).elementType == MINUS &&
+                elementSet.get(1).elementType == BIG_INT) {
+            elementSet.remove(0);
+            elementSet.get(0).value.setSign(BigInteger.Sign.NEGATIVE);
+        }
+
+        //Проверка на отрицательность остальных чисел в выражении (кроме первого)
+        for (int i = 1; i < elementSet.size(); i++) {
+            if (elementSet.get(i).elementType == MINUS &&
+                    elementSet.get(i - 1).elementType != BIG_INT &&
+                    i < elementSet.size() - 1) {
+                elementSet.get(i + 1).value.setSign(BigInteger.Sign.NEGATIVE);
+                elementSet.remove(i);
+                i--;
+            }
+        }
+
+        //Проверка на правильное количество элементов в выражении,
+        //и заканчивается ли оно сичлами
+        if(elementSet.size() < 3 || elementSet.get(0).elementType != BIG_INT ||
+                elementSet.get(elementSet.size()-1).elementType != BIG_INT){
+            throw new IllegalArgumentException("incorrect number of elements");
+        }
+
+        //Проверка, нет ли подряд идущих знаков математических операций
+        for (int i=1; i<elementSet.size(); i++){
+            if(elementSet.get(i).elementType != BIG_INT &&
+                    elementSet.get(i-1).elementType != BIG_INT){
+                throw new IllegalArgumentException("Wrong operations");
+            }
+        }
     }
 
 
