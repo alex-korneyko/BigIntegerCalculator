@@ -44,15 +44,47 @@ public class Parser implements Observer, Observable {
         expression = new Expression();
         error = false;
 
-        //Дальше код реализации метода
+        char[] charArray = stringExpression.toCharArray();
 
+        String str = "";
+        for (int i = 0; i < charArray.length; i++) {
+            if (isSign(charArray[i])) {
+                if (str.length() == 0 && isSignMinus(charArray[i])) {
+                    str = String.valueOf(charArray[i]);
+                } else {
+                    if (str.length() != 0) {
+                        expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
+                    }
+                    String stringSign  = String.valueOf(charArray[i]);
+                    expression.elementSet.add(new ExpressionElement(ExpressionElementType.stringToType(stringSign)));
 
+                    str = "";
+                }
+            } else if (isDigit(charArray[i])) {
+                if (str.length() == 0) {
+                    str = String.valueOf(charArray[i]);
+                } else {
+                    str = str.concat(String.valueOf(charArray[i]));
+                }
+            }
+        }
+        expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
 
-        //------------------------------
         notifyObservers();
         return expression;
     }
 
+    private static boolean isDigit(final char c) {
+        return "0123456789.".indexOf(c) != -1;
+    }
+
+    private static boolean isSign(final char c) {
+        return "+-*/^".indexOf(c) != -1;
+    }
+
+    private static boolean isSignMinus(final char c) {
+        return "-".indexOf(c) != -1;
+    }
 
     @Override
     public void regObserver(Observer observer) {

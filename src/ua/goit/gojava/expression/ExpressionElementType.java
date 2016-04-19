@@ -24,4 +24,20 @@ public enum ExpressionElementType {
 
         return null;
     }
+
+    public static ExpressionElementType stringToType(String type) {
+        if (type.equals("+")) {
+            return PLUS;
+        } else if (type.equals("-")) {
+            return MINUS;
+        } else if (type.equals("*")) {
+            return MULTIPLY;
+        } else if (type.equals("/")) {
+            return DIVIDE;
+        } else if (type.equals("^")) {
+            return POWER;
+        }
+
+        return BIG_INT;
+    }
 }
