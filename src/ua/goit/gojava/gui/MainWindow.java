@@ -4,6 +4,8 @@ import ua.goit.gojava.Observer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author Alexandr Korneyko, 2016
@@ -37,10 +39,13 @@ public class MainWindow extends JFrame {
         add(keyboard, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.NORTH,
                 GridBagConstraints.HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
 
+
         pack();
     }
 
     public Observer getScreen() {
         return screen;
     }
+
+
 }
