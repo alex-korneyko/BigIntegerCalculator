@@ -51,14 +51,23 @@ public class BigCompute implements Observer, Observable {
         return result;
     }
 
+    /**
+     * ищем скобки в выражении
+     * если они есть то сначало проводим операции в скобках
+    * */
     private boolean isParenthesis(Expression expression) {
         for (ExpressionElement expressionElement : expression.elementSet) {
-            if (expressionElement.elementType == ExpressionElementType.OPEN_PARENTHESIS)
+            if (expressionElement.elementType == ExpressionElementType.OPEN_PARENTHESIS) {
                 return true;
+            }
         }
         return false;
     }
 
+    /**
+     * выполняем операции в скобках
+     * после того как узнаем результат удаляем ненужные строки (обьекти ExpressionElement со списка)
+     * */
     private void doComputeInBrackets(Expression expression) {
         int[] arrayFromTo = searchExpressionToCompute(expression.elementSet);
 
@@ -72,6 +81,11 @@ public class BigCompute implements Observer, Observable {
         expression.elementSet.add(arrayFromTo[0], elementSetForCompute.get(0));
     }
 
+    /**
+     * находим индексы кавычек "(" и ")" в списке выражения
+     * результат int[]
+     * где result[0] - индекс "(", result[1] - индекс ")"
+     * */
     private int[] searchExpressionToCompute(List<ExpressionElement> elementSet) {
         int[] result = {0, 0};
         boolean flag = false;
@@ -99,6 +113,9 @@ public class BigCompute implements Observer, Observable {
         return result;
     }
 
+    /**
+     * узнаем результат выражения учитывая приоритеты операций
+     * */
     private BigInteger expressDecision(List<ExpressionElement> elementSet) {
         while (isOperationPriority(elementSet, 3)) {
             doOperation(elementSet, 3);
@@ -115,12 +132,18 @@ public class BigCompute implements Observer, Observable {
         return elementSet.get(0).value;
     }
 
+    /**
+     * удаляем уже успользованные строки со списка (ExpressionElement елементы)
+     * */
     private void removeElementFromList(List<ExpressionElement> list, int from, int to) {
         for (int i = from - 1, j = from; i < to; i++) {
             list.remove(j);
         }
     }
 
+    /**
+     * ищем операции по приоритету в выражении
+     * */
     private boolean isOperationPriority(List<ExpressionElement> elementSet, int operationPriority) {
         for (ExpressionElement expressionElement : elementSet) {
             if (expressionElement.operationPriority == operationPriority)
@@ -129,6 +152,9 @@ public class BigCompute implements Observer, Observable {
         return false;
     }
 
+    /**
+     * упрощяем выражение (узнаем результат, удаляем ненужные строки)
+     * */
     private List<ExpressionElement> doOperation(List<ExpressionElement> elementSet, int operationPriority) {
         for (int i = 1; i < elementSet.size()-1; i++) {
             if (elementSet.get(i).operationPriority == operationPriority) {

@@ -84,6 +84,9 @@ public class Parser implements Observer, Observable {
         return expression;
     }
 
+    /**
+     * проверка валидности выражения
+     * */
     private void validationExpression(char[] charArray) {
         if (!isCorrectExpressionRegularitySignNumber(charArray)) {
             throw new IllegalArgumentException();
@@ -102,6 +105,9 @@ public class Parser implements Observer, Observable {
         }
     }
 
+    /**
+     * проверка не встречается ли подряд два арифметических символа
+     * */
     private boolean isCorrectExpressionRegularitySignNumber(char[] charArray) {
         for (int i = 0; i < charArray.length-1; i++) {
             if (isOperationSign(charArray[i]) && isOperationSign(charArray[i+1])) {
@@ -111,6 +117,9 @@ public class Parser implements Observer, Observable {
         return true;
     }
 
+    /**
+     * равно ли число открыывающих и закрывающих кавычек
+     * */
     private boolean isCorrectCountBrackets(char[] charArray) {
         int countBrackets = 0;
 
@@ -131,6 +140,10 @@ public class Parser implements Observer, Observable {
         return true;
     }
 
+    /**
+     * правильно расставлены кавычки
+     * сначала "(" потом ")"
+     * */
     private boolean isCorrectRegularityBrackets(char[] charArray) {
         int count = 0;
 
@@ -151,22 +164,37 @@ public class Parser implements Observer, Observable {
         return true;
     }
 
+    /**
+     * не является ли последний симвом в выражении арифметической операцией
+     * */
     private boolean checkExpression(char[] charArray) {
         return !isOperationSign(charArray[charArray.length-1]);
     }
 
+    /**
+     * является ли симвом арифметической операцией
+     * */
     private static boolean isOperationSign(final char c) {
         return "+-*/^".indexOf(c) != -1;
     }
 
+    /**
+     * является ли симвом цифрой
+     * */
     private static boolean isDigit(final char c) {
         return "0123456789.".indexOf(c) != -1;
     }
 
+    /**
+     * является ли симвом арифметическим
+     * */
     private static boolean isSign(final char c) {
         return "+-*/^()".indexOf(c) != -1;
     }
 
+    /**
+     * является ли симвом знаком "-"
+     * */
     private static boolean isSignMinus(final char c) {
         return "-".indexOf(c) != -1;
     }
