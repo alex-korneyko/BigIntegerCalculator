@@ -41,7 +41,7 @@ public class BigCompute implements Observer, Observable {
         error = false;
 
         if (!isCorrectExpression(expression)) {
-            throw new ArithmeticException("Your Expression is Incorrect");
+            throw new ArithmeticException();
         }
 
         while (isParenthesis(expression)) {
