@@ -69,9 +69,9 @@ public class Parser implements Observer, Observable {
                 }
             }
         }
-        //if (!str.isEmpty()) {
+        if (!str.isEmpty()) {
             expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
-        //}
+        }
 
         if (expression.elementSet.size() <= 2) {
             throw new IllegalArgumentException();
