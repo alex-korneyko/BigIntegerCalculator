@@ -103,7 +103,21 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("225")));
                         elementSet.add(new ExpressionElement(DIVIDE));
                         elementSet.add(new ExpressionElement(new BigInteger("10")));
-                    }}}
+                    }}},
+            {"159^56*(-456+225)/10",
+                    new Expression() {{
+                        elementSet.add(new ExpressionElement(new BigInteger("159")));
+                        elementSet.add(new ExpressionElement(POWER));
+                        elementSet.add(new ExpressionElement(new BigInteger("56")));
+                        elementSet.add(new ExpressionElement(MULTIPLY));
+                        elementSet.add(new ExpressionElement(OPEN_PARENTHESIS));
+                        elementSet.add(new ExpressionElement(new BigInteger("-456")));
+                        elementSet.add(new ExpressionElement(PLUS));
+                        elementSet.add(new ExpressionElement(new BigInteger("225")));
+                        elementSet.add(new ExpressionElement(CLOSE_PARENTHESIS));
+                        elementSet.add(new ExpressionElement(DIVIDE));
+                        elementSet.add(new ExpressionElement(new BigInteger("10")));
+                    }}},
 
 
     };

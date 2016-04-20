@@ -8,8 +8,8 @@ public enum ExpressionElementType {
     BIG_INT, BIG_DECIMAL, BIG_FLOAT, PLUS, MINUS, MULTIPLY, DIVIDE, POWER, OPEN_PARENTHESIS, CLOSE_PARENTHESIS;
 
     @Override
-    public String toString(){
-        switch (this){
+    public String toString() {
+        switch (this) {
             case PLUS:
                 return "+";
             case MINUS:
@@ -40,6 +40,10 @@ public enum ExpressionElementType {
             return DIVIDE;
         } else if (type.equals("^")) {
             return POWER;
+        } else if (type.equals("(")) {
+            return OPEN_PARENTHESIS;
+        } else if (type.equals(")")) {
+            return CLOSE_PARENTHESIS;
         }
 
         return BIG_INT;

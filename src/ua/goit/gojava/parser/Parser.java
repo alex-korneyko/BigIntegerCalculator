@@ -55,7 +55,7 @@ public class Parser implements Observer, Observable {
                     if (str.length() != 0) {
                         expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
                     }
-                    String stringSign  = String.valueOf(charArray[i]);
+                    String stringSign = String.valueOf(charArray[i]);
                     expression.elementSet.add(new ExpressionElement(ExpressionElementType.stringToType(stringSign)));
 
                     str = "";
@@ -70,6 +70,10 @@ public class Parser implements Observer, Observable {
         }
         expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
 
+        if (expression.elementSet.size() <= 2) {
+            throw new IllegalArgumentException();
+        }
+
         notifyObservers();
         return expression;
     }
@@ -79,7 +83,7 @@ public class Parser implements Observer, Observable {
     }
 
     private static boolean isSign(final char c) {
-        return "+-*/^".indexOf(c) != -1;
+        return "+-*/^()".indexOf(c) != -1;
     }
 
     private static boolean isSignMinus(final char c) {
