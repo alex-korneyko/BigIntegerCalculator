@@ -40,6 +40,10 @@ public class BigCompute implements Observer, Observable {
         result = new BigInteger("0");
         error = false;
 
+        if (!isCorrectExpression(expression)) {
+            throw new ArithmeticException("Your Expression is Incorrect");
+        }
+
         while (isParenthesis(expression)) {
             doComputeInBrackets(expression);
         }
@@ -49,6 +53,27 @@ public class BigCompute implements Observer, Observable {
         notifyObservers();
 
         return result;
+    }
+
+    private boolean isCorrectExpression(Expression expression) {
+        int countOpenParenthesis = 0;
+        int countCloseParenthesis = 0;
+
+        for (ExpressionElement expressionElement : expression.elementSet) {
+            if (expressionElement.elementType == ExpressionElementType.OPEN_PARENTHESIS) {
+                countOpenParenthesis += 1;
+            }
+
+            if (expressionElement.elementType == ExpressionElementType.CLOSE_PARENTHESIS) {
+                countCloseParenthesis += 1;
+            }
+        }
+
+        if (countOpenParenthesis != countCloseParenthesis) {
+            return false;
+        }
+
+        return true;
     }
 
     private boolean isParenthesis(Expression expression) {
