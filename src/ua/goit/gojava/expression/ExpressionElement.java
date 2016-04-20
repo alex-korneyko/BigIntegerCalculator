@@ -34,7 +34,7 @@ public class ExpressionElement implements Comparable<ExpressionElement> {
             operationPriority = 1;
         } else if (elementType == MULTIPLY || elementType == DIVIDE) {
             operationPriority = 2;
-        } else {
+        } else { // BIG_INT, BIG_DECIMAL, BIG_FLOAT, POWER, OPEN_PARENTHESIS, CLOSE_PARENTHESIS;
             operationPriority = 3;
         }
     }

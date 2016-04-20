@@ -46,6 +46,7 @@ public class ParametrizedParserTest {
 
     private static Object[][] parametersSet = new Object[][]{
 
+            //0
             {"123+456",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("123")));
@@ -53,6 +54,7 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("456")));
                     }}},
 
+            //1
             {"12345678912345678912345678901234567891234567891234567890/456321548765463135446841361",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("12345678912345678912345678901234567891234567891234567890")));
@@ -60,6 +62,7 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("456321548765463135446841361")));
                     }}},
 
+            //2
             {"-456^789",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("-456")));
@@ -67,13 +70,17 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("789")));
                     }}},
 
-            {"159*-56",
+            //3
+            {"159*(-56)",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("159")));
                         elementSet.add(new ExpressionElement(MULTIPLY));
+                        elementSet.add(new ExpressionElement(OPEN_PARENTHESIS));
                         elementSet.add(new ExpressionElement(new BigInteger("-56")));
+                        elementSet.add(new ExpressionElement(CLOSE_PARENTHESIS));
                     }}},
 
+            //4
             {"159+56*456",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("159")));
@@ -83,27 +90,35 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("456")));
                     }}},
 
-            {"159+56*-456",
+            //5
+            {"159+56*(-456)",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("159")));
                         elementSet.add(new ExpressionElement(PLUS));
                         elementSet.add(new ExpressionElement(new BigInteger("56")));
                         elementSet.add(new ExpressionElement(MULTIPLY));
+                        elementSet.add(new ExpressionElement(OPEN_PARENTHESIS));
                         elementSet.add(new ExpressionElement(new BigInteger("-456")));
+                        elementSet.add(new ExpressionElement(CLOSE_PARENTHESIS));
                     }}},
 
-            {"159^56*-456+225/10",
+            //6
+            {"159^56*(-456)+225/10",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("159")));
                         elementSet.add(new ExpressionElement(POWER));
                         elementSet.add(new ExpressionElement(new BigInteger("56")));
                         elementSet.add(new ExpressionElement(MULTIPLY));
+                        elementSet.add(new ExpressionElement(OPEN_PARENTHESIS));
                         elementSet.add(new ExpressionElement(new BigInteger("-456")));
+                        elementSet.add(new ExpressionElement(CLOSE_PARENTHESIS));
                         elementSet.add(new ExpressionElement(PLUS));
                         elementSet.add(new ExpressionElement(new BigInteger("225")));
                         elementSet.add(new ExpressionElement(DIVIDE));
                         elementSet.add(new ExpressionElement(new BigInteger("10")));
                     }}},
+
+            //7
             {"159^56*(-456+225)/10",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("159")));
@@ -119,6 +134,7 @@ public class ParametrizedParserTest {
                         elementSet.add(new ExpressionElement(new BigInteger("10")));
                     }}},
 
+            //8
             {"2*(250*(32768+2))/250",
                     new Expression() {{
                         elementSet.add(new ExpressionElement(new BigInteger("2")));

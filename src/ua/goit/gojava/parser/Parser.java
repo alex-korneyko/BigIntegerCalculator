@@ -47,6 +47,8 @@ public class Parser implements Observer, Observable {
 
         char[] charArray = stringExpression.toCharArray();
 
+        validationExpression(charArray);
+
         String str = "";
         for (int i = 0; i < charArray.length; i++) {
             if (isSign(charArray[i])) {
@@ -69,6 +71,7 @@ public class Parser implements Observer, Observable {
                 }
             }
         }
+
         if (!str.isEmpty()) {
             expression.elementSet.add(new ExpressionElement(new BigInteger(str)));
         }
@@ -79,6 +82,81 @@ public class Parser implements Observer, Observable {
 
         notifyObservers();
         return expression;
+    }
+
+    private void validationExpression(char[] charArray) {
+        if (!isCorrectExpressionRegularitySignNumber(charArray)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (!isCorrectCountBrackets(charArray)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (!isCorrectRegularityBrackets(charArray)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (!checkExpression(charArray)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean isCorrectExpressionRegularitySignNumber(char[] charArray) {
+        for (int i = 0; i < charArray.length-1; i++) {
+            if (isOperationSign(charArray[i]) && isOperationSign(charArray[i+1])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isCorrectCountBrackets(char[] charArray) {
+        int countBrackets = 0;
+
+        for (char c : charArray) {
+            if (String.valueOf(c).equals("(")) {
+                countBrackets += 1;
+            }
+
+            if (String.valueOf(c).equals(")")) {
+                countBrackets -= 1;
+            }
+        }
+
+        if (countBrackets != 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isCorrectRegularityBrackets(char[] charArray) {
+        int count = 0;
+
+        for (char c : charArray) {
+            if (String.valueOf(c).equals("(")) {
+                count += 1;
+            }
+
+            if (String.valueOf(c).equals(")")) {
+                count -= 1;
+            }
+
+            if (count < 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean checkExpression(char[] charArray) {
+        return !isOperationSign(charArray[charArray.length-1]);
+    }
+
+    private static boolean isOperationSign(final char c) {
+        return "+-*/^".indexOf(c) != -1;
     }
 
     private static boolean isDigit(final char c) {
