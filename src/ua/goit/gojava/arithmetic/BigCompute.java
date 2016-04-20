@@ -37,73 +37,136 @@ public class BigCompute implements Observer, Observable {
     // Expression expression:
     // public List<ExpressionElement> elementSet = new ArrayList<>();
     public BigInteger compute(Expression expression) throws ArithmeticException {
-        //result = new BigInteger("0");
+        result = new BigInteger("0");
         error = false;
 
-        while (isOperationPriority(expression, 3)) {
-            doOperation(expression, 3);
+        while (isParenthesis(expression)) {
+            doComputeInBrackets(expression);
         }
 
-        while (isOperationPriority(expression, 2)) {
-            doOperation(expression, 2);
-        }
+        result = expressDecision(expression.elementSet);
 
-        while (isOperationPriority(expression, 1)) {
-            doOperation(expression, 1);
-        }
-
-        result = expression.elementSet.get(0).value;
         notifyObservers();
 
         return result;
     }
 
-    private boolean isOperationPriority(Expression expression, int operationPriority) {
+    private boolean isParenthesis(Expression expression) {
         for (ExpressionElement expressionElement : expression.elementSet) {
+            if (expressionElement.elementType == ExpressionElementType.OPEN_PARENTHESIS)
+                return true;
+        }
+        return false;
+    }
+
+    private void doComputeInBrackets(Expression expression) {
+        int[] arrayFromTo = searchExpressionToCompute(expression.elementSet);
+
+        List<ExpressionElement> elementSetForCompute =
+                new ArrayList<ExpressionElement>(expression.elementSet.subList(arrayFromTo[0] + 1, arrayFromTo[1]));
+
+        expressDecision(elementSetForCompute);
+
+        removeElementFromList(expression.elementSet, arrayFromTo[0], arrayFromTo[1]);
+
+        expression.elementSet.add(arrayFromTo[0], elementSetForCompute.get(0));
+    }
+
+    private int[] searchExpressionToCompute(List<ExpressionElement> elementSet) {
+        int[] result = {0, 0};
+        boolean flag = false;
+
+        for (int i = 0; i < elementSet.size(); i++) {
+            if (elementSet.get(i).elementType == ExpressionElementType.OPEN_PARENTHESIS) {
+                flag = true;
+                result[0] = i;
+            }
+
+            if (elementSet.get(i).elementType == ExpressionElementType.CLOSE_PARENTHESIS && flag) {
+                flag = false;
+                result[1] = i;
+            }
+
+            if (elementSet.get(i).elementType != ExpressionElementType.OPEN_PARENTHESIS && flag
+                    && elementSet.get(i).elementType != ExpressionElementType.CLOSE_PARENTHESIS) {
+            }
+
+            if (elementSet.get(i).elementType == ExpressionElementType.OPEN_PARENTHESIS) {
+                result[0] = i;
+            }
+        }
+
+        return result;
+    }
+
+    private BigInteger expressDecision(List<ExpressionElement> elementSet) {
+        while (isOperationPriority(elementSet, 3)) {
+            doOperation(elementSet, 3);
+        }
+
+        while (isOperationPriority(elementSet, 2)) {
+            doOperation(elementSet, 2);
+        }
+
+        while (isOperationPriority(elementSet, 1)) {
+            doOperation(elementSet, 1);
+        }
+
+        return elementSet.get(0).value;
+    }
+
+    private void removeElementFromList(List<ExpressionElement> list, int from, int to) {
+        for (int i = from - 1, j = from; i < to; i++) {
+            list.remove(j);
+        }
+    }
+
+    private boolean isOperationPriority(List<ExpressionElement> elementSet, int operationPriority) {
+        for (ExpressionElement expressionElement : elementSet) {
             if (expressionElement.operationPriority == operationPriority)
                 return true;
         }
         return false;
     }
 
-    private Expression doOperation(Expression expression, int operationPriority) {
-        for (int i = 1; i < expression.elementSet.size()-1; i++) {
-            if (expression.elementSet.get(i).operationPriority == operationPriority) {
+    private List<ExpressionElement> doOperation(List<ExpressionElement> elementSet, int operationPriority) {
+        for (int i = 1; i < elementSet.size()-1; i++) {
+            if (elementSet.get(i).operationPriority == operationPriority) {
                 if (operationPriority == 3) {
-                    expression.elementSet.get(i-1).value =
-                            BigMath.power(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    elementSet.get(i-1).value =
+                            BigMath.power(elementSet.get(i-1).value, elementSet.get(i+1).value);
                 }
 
                 else if (operationPriority == 2) {
-                    if (expression.elementSet.get(i).elementType == ExpressionElementType.MULTIPLY) {
-                        expression.elementSet.get(i-1).value =
-                                BigMath.multiply(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    if (elementSet.get(i).elementType == ExpressionElementType.MULTIPLY) {
+                        elementSet.get(i-1).value =
+                                BigMath.multiply(elementSet.get(i-1).value, elementSet.get(i+1).value);
                     }
-                    else if (expression.elementSet.get(i).elementType == ExpressionElementType.DIVIDE){
-                        expression.elementSet.get(i-1).value =
-                                BigMath.divide(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    else if (elementSet.get(i).elementType == ExpressionElementType.DIVIDE){
+                        elementSet.get(i-1).value =
+                                BigMath.divide(elementSet.get(i-1).value, elementSet.get(i+1).value);
                     }
                 }
 
                 else if (operationPriority == 1) {
-                    if (expression.elementSet.get(i).elementType == ExpressionElementType.PLUS) {
-                        expression.elementSet.get(i-1).value =
-                                BigMath.add(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    if (elementSet.get(i).elementType == ExpressionElementType.PLUS) {
+                        elementSet.get(i-1).value =
+                                BigMath.add(elementSet.get(i-1).value, elementSet.get(i+1).value);
                     }
-                    else if (expression.elementSet.get(i).elementType == ExpressionElementType.MINUS){
-                        expression.elementSet.get(i-1).value =
-                                BigMath.sub(expression.elementSet.get(i-1).value, expression.elementSet.get(i+1).value);
+                    else if (elementSet.get(i).elementType == ExpressionElementType.MINUS){
+                        elementSet.get(i-1).value =
+                                BigMath.sub(elementSet.get(i-1).value, elementSet.get(i+1).value);
                     }
                 }
 
-                expression.elementSet.remove(i+1);
-                expression.elementSet.remove(i);
+                elementSet.remove(i+1);
+                elementSet.remove(i);
 
-                return expression;
+                return elementSet;
             }
         }
 
-        return expression;
+        return elementSet;
     }
 
     @Override
