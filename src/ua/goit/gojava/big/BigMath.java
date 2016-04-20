@@ -1,8 +1,8 @@
 package ua.goit.gojava.big;
 
 /**
- *
- * Created by ... on 12.04.2016.
+ * @author Ihor Pylyavets, 2016
+ * @version 1.0 14.04.2016
  */
 public class BigMath {
     public static BigInteger add(BigInteger x, BigInteger y){

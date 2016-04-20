@@ -5,7 +5,10 @@ import ua.goit.gojava.Observer;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * @author Alexandr Korneyko, 2016
+ * @version 1.1 19.04.2016
+ */
 public class Screen extends JFormattedTextField implements Observer {
 
     public Screen() {

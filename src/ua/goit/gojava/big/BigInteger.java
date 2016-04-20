@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @author Anton Petrov, 2016
- * @version 1.01
+ * @version 1.05
  * BigInteger, represents integers, that does not fit at standard primitive types.
  * BigInteger is immutable type.
  */

@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ... on 12.04.2016.
+ * @author Ihor Pylyavets, 2016
+ * @version 2.0 20.04.2016
  */
 public class BigCompute implements Observer, Observable {
 

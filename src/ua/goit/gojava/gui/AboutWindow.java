@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by admin on 17.04.2016.
+ * @author Alexandr Korneyko, 2016
+ * @version 1.1 20.04.2016
  */
 public class AboutWindow extends JFrame {
 
@@ -46,13 +47,13 @@ public class AboutWindow extends JFrame {
                 "\n" +
                 "<div><span style=\"color:#0000FF\"><strong style=\"line-height:1.6em\"><span style=\"font-size:14px\">В составе:</span></strong></span></div>\n" +
                 "\n" +
-                "<div><a href=\"https://www.facebook.com/Alex.Korneyko\" target=\"_blank\"><strong>Александр Корнейко</strong></a> - Концепция, проектирование и общаяя координация, GUI.</div>\n" +
+                "<div><a href=\"https://www.facebook.com/Alex.Korneyko\" target=\"_blank\"><strong>Александр Корнейко</strong></a> - Концепция, проектирование и общаяя координация. GUI.</div>\n" +
                 "\n" +
                 "<div><a href=\"https://www.facebook.com/anton.petrov.92560\"><strong>Антон Петров</strong></a> - Реализация класса BigInteger</div>\n" +
                 "\n" +
-                "<div><a href=\"https://www.facebook.com/ihor.pylyavets\"><strong>Игорь Пилявец</strong></a> - Реализация класса BigCompute</div>\n" +
+                "<div><a href=\"https://www.facebook.com/ihor.pylyavets\"><strong>Игорь Пилявец</strong></a> - Реализация классов BigCompute и Parser</div>\n" +
                 "\n" +
-                "<div><a href=\"https://www.facebook.com/dmytro.chumack\"><strong>Дмитрий Чумак</strong></a> - Реализация класса Parser</div>\n" +
+                "<div><a href=\"https://www.facebook.com/dmytro.chumack\"><strong>Дмитрий Чумак</strong></a> - Реализация альтернативного класса Parser</div>\n" +
                 "\n" +
                 "<div>\n" +
                 "<hr />\n" +
@@ -69,7 +70,6 @@ public class AboutWindow extends JFrame {
 
         add(buttonOk, new GridBagConstraints(0, 1, 1, 1, 0.5, 1, GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
                 new Insets(2, 2, 2, 2), 0, 0));
-
 
         pack();
     }

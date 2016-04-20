@@ -13,11 +13,14 @@ import java.util.List;
 
 import static java.awt.GridBagConstraints.*;
 
-
+/**
+ * @author Alexandr Korneyko, 2016
+ * @version 1.2 20.04.2016
+ */
 public class Keyboard extends JPanel implements Observable {
 
     private List<Observer> observers = new ArrayList<>();
-    String stringExpression = "";
+    private String keyboardBuffer = "";
     boolean equallyPressed = false;
 
     public  Keyboard() {
@@ -27,6 +30,9 @@ public class Keyboard extends JPanel implements Observable {
         createKeys();
     }
 
+    public void setBuffer(String string){
+        keyboardBuffer = string;
+    }
 
     private void createKeys() {
 
@@ -128,10 +134,10 @@ public class Keyboard extends JPanel implements Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (stringExpression.equals("") && e.getActionCommand().equals("0")) {
+            if (keyboardBuffer.equals("") && e.getActionCommand().equals("0")) {
                 return;
             }
-            stringExpression += e.getActionCommand();
+            keyboardBuffer += e.getActionCommand();
             notifyObservers();
         }
     }
@@ -140,7 +146,7 @@ public class Keyboard extends JPanel implements Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            stringExpression += e.getActionCommand();
+            keyboardBuffer += e.getActionCommand();
             notifyObservers();
         }
     }
@@ -149,7 +155,7 @@ public class Keyboard extends JPanel implements Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            stringExpression = "";
+            keyboardBuffer = "";
             notifyObservers();
         }
     }
@@ -168,8 +174,8 @@ public class Keyboard extends JPanel implements Observable {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (stringExpression.length() > 0) {
-                stringExpression = stringExpression.substring(0, stringExpression.length() - 1);
+            if (keyboardBuffer.length() > 0) {
+                keyboardBuffer = keyboardBuffer.substring(0, keyboardBuffer.length() - 1);
                 notifyObservers();
             }
         }
@@ -190,12 +196,12 @@ public class Keyboard extends JPanel implements Observable {
         for (Observer observer : observers) {
             if (equallyPressed) {
                 if (observer instanceof Parser) {
-                    observer.update(stringExpression);
-                    stringExpression = "";
+                    observer.update(keyboardBuffer);
+                    keyboardBuffer = "";
                 }
             } else {
                 if (observer instanceof Screen) {
-                    observer.update(stringExpression);
+                    observer.update(keyboardBuffer);
                 }
             }
         }

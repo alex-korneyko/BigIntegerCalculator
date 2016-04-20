@@ -14,7 +14,8 @@ import java.util.List;
 
 
 /**
- * Created by ... on 12.04.2016.
+ * @author Ihor Pylyavets, 2016
+ * @version 1.0 19.04.2016
  */
 public class Parser implements Observer, Observable {
 

@@ -5,10 +5,13 @@ import ua.goit.gojava.Observer;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * @author Alexandr Korneyko, 2016
+ * @version 1.4 20.04.2016
+ */
 public class MainWindow extends JFrame {
 
-    private Screen screen = new Screen();
+    public Screen screen = new Screen();
 
     public MainWindow(String title, Dimension dim, Observer o) {
         Keyboard keyboard = new Keyboard();
@@ -20,7 +23,7 @@ public class MainWindow extends JFrame {
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        MenuBar menuBar = new MenuBar();
+        MenuBar menuBar = new MenuBar(screen, keyboard);
         setJMenuBar(menuBar);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());

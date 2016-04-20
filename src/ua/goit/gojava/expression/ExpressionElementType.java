@@ -1,7 +1,8 @@
 package ua.goit.gojava.expression;
 
 /**
- * Created by admin on 12.04.2016.
+ * @author Alexandr Korneyko, 2016
+ * @version 1.1 20.04.2016
  */
 public enum ExpressionElementType {
 
@@ -30,20 +31,21 @@ public enum ExpressionElementType {
     }
 
     public static ExpressionElementType stringToType(String type) {
-        if (type.equals("+")) {
-            return PLUS;
-        } else if (type.equals("-")) {
-            return MINUS;
-        } else if (type.equals("*")) {
-            return MULTIPLY;
-        } else if (type.equals("/")) {
-            return DIVIDE;
-        } else if (type.equals("^")) {
-            return POWER;
-        } else if (type.equals("(")) {
-            return OPEN_PARENTHESIS;
-        } else if (type.equals(")")) {
-            return CLOSE_PARENTHESIS;
+        switch (type) {
+            case "+":
+                return PLUS;
+            case "-":
+                return MINUS;
+            case "*":
+                return MULTIPLY;
+            case "/":
+                return DIVIDE;
+            case "^":
+                return POWER;
+            case "(":
+                return OPEN_PARENTHESIS;
+            case ")":
+                return CLOSE_PARENTHESIS;
         }
 
         return BIG_INT;
