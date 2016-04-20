@@ -39,7 +39,6 @@ public class MainWindow extends JFrame {
         add(keyboard, new GridBagConstraints(0, 1, 1, 1, 1, 1, GridBagConstraints.NORTH,
                 GridBagConstraints.HORIZONTAL, new Insets(2, 2, 2, 2), 0, 0));
 
-
         pack();
     }
 

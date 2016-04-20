@@ -16,7 +16,6 @@ public class Screen extends JFormattedTextField implements Observer {
         setText("0");
         setHorizontalAlignment(RIGHT);
         setFont(new Font("a", Font.BOLD, 16));
-
     }
 
     @Override

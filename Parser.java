@@ -15,7 +15,7 @@ import java.util.List;
 
 
 /**
- * Created by Chumack Dmitro on 19.04.2016.
+ * Created by ... on 12.04.2016.
  */
 public class Parser implements Observer, Observable {
 
@@ -24,33 +24,33 @@ public class Parser implements Observer, Observable {
     boolean error;
 
     /**
-     * Метод должен из строки сгенерировать "выражение" (объект класса Expression).
-     * Выражение может быть любой длинны, и использовать только следующие
-     * математические операции: '+' '-' '*' '/' '^'
-     * Должен создать объект Expression, определить все числа и знаки операций, из каждого создать
-     * объект ExpressionElement, и поместить в коллекцию этого объекта Expression.
-     * Варианты выполнения парсинга описаны в тестовом классе ParametrizedParserTest,
-     * должны все тесты пройти на "ОК"
-     * В случае получения некорректной строки, должно сгенерироваться исключение IllegalArgumentException.
-     * Варианты некорректных строк описаны в тестовом классе ParametrizedParserTest2,
-     * все тесты должны пройти на "ОК"
+     * РњРµС‚РѕРґ РґРѕР»Р¶РµРЅ РёР· СЃС‚СЂРѕРєРё СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ "РІС‹СЂР°Р¶РµРЅРёРµ" (РѕР±СЉРµРєС‚ РєР»Р°СЃСЃР° Expression).
+     * Р’С‹СЂР°Р¶РµРЅРёРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ Р»СЋР±РѕР№ РґР»РёРЅРЅС‹, Рё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ С‚РѕР»СЊРєРѕ СЃР»РµРґСѓСЋС‰РёРµ
+     * РјР°С‚РµРјР°С‚РёС‡РµСЃРєРёРµ РѕРїРµСЂР°С†РёРё: '+' '-' '*' '/' '^'
+     * Р”РѕР»Р¶РµРЅ СЃРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ Expression, РѕРїСЂРµРґРµР»РёС‚СЊ РІСЃРµ С‡РёСЃР»Р° Рё Р·РЅР°РєРё РѕРїРµСЂР°С†РёР№, РёР· РєР°Р¶РґРѕРіРѕ СЃРѕР·РґР°С‚СЊ
+     * РѕР±СЉРµРєС‚ ExpressionElement, Рё РїРѕРјРµСЃС‚РёС‚СЊ РІ РєРѕР»Р»РµРєС†РёСЋ СЌС‚РѕРіРѕ РѕР±СЉРµРєС‚Р° Expression.
+     * Р’Р°СЂРёР°РЅС‚С‹ РІС‹РїРѕР»РЅРµРЅРёСЏ РїР°СЂСЃРёРЅРіР° РѕРїРёСЃР°РЅС‹ РІ С‚РµСЃС‚РѕРІРѕРј РєР»Р°СЃСЃРµ ParametrizedParserTest,
+     * РґРѕР»Р¶РЅС‹ РІСЃРµ С‚РµСЃС‚С‹ РїСЂРѕР№С‚Рё РЅР° "РћРљ"
+     * Р’ СЃР»СѓС‡Р°Рµ РїРѕР»СѓС‡РµРЅРёСЏ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕР№ СЃС‚СЂРѕРєРё, РґРѕР»Р¶РЅРѕ СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊСЃСЏ РёСЃРєР»СЋС‡РµРЅРёРµ IllegalArgumentException.
+     * Р’Р°СЂРёР°РЅС‚С‹ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹С… СЃС‚СЂРѕРє РѕРїРёСЃР°РЅС‹ РІ С‚РµСЃС‚РѕРІРѕРј РєР»Р°СЃСЃРµ ParametrizedParserTest2,
+     * РІСЃРµ С‚РµСЃС‚С‹ РґРѕР»Р¶РЅС‹ РїСЂРѕР№С‚Рё РЅР° "РћРљ"
      * <p>
-     * Смотри диаграмму структуры коллекции выражения: Expression structure v1.0.jpg
+     * РЎРјРѕС‚СЂРё РґРёР°РіСЂР°РјРјСѓ СЃС‚СЂСѓРєС‚СѓСЂС‹ РєРѕР»Р»РµРєС†РёРё РІС‹СЂР°Р¶РµРЅРёСЏ: Expression structure v1.0.jpg
      *
-     * @param stringExpression текстовая строка
-     * @return объект класса Expression
+     * @param stringExpression С‚РµРєСЃС‚РѕРІР°СЏ СЃС‚СЂРѕРєР°
+     * @return РѕР±СЉРµРєС‚ РєР»Р°СЃСЃР° Expression
      */
     public Expression toBigInteger(String stringExpression) throws IllegalArgumentException {
 
         expression = new Expression();
         error = false;
 
-        //Дальше код реализации метода
+        //Р”Р°Р»СЊС€Рµ РєРѕРґ СЂРµР°Р»РёР·Р°С†РёРё РјРµС‚РѕРґР°
         String number;
         int sign=0;
         int i=0;
 
-        if ((stringExpression.length()==1)             //проверка на то что введенный нами символ не знак - это ошибка!
+        if ((stringExpression.length()==1)             //РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ С‡С‚Рѕ РІРІРµРґРµРЅРЅС‹Р№ РЅР°РјРё СЃРёРјРІРѕР» РЅРµ Р·РЅР°Рє - СЌС‚Рѕ РѕС€РёР±РєР°!
                 && ((stringExpression.charAt(0)=='+')
                 || (stringExpression.charAt(0)=='-')
                 || (stringExpression.charAt(0)=='*')
@@ -61,31 +61,31 @@ public class Parser implements Observer, Observable {
             return expression;
         }
 
-        while (i<stringExpression.length())         //прохождение всех позиций в нашей строке
-         {
+        while (i<stringExpression.length())         //РїСЂРѕС…РѕР¶РґРµРЅРёРµ РІСЃРµС… РїРѕР·РёС†РёР№ РІ РЅР°С€РµР№ СЃС‚СЂРѕРєРµ
+        {
             number="";
             String c=""+stringExpression.charAt(i);
-                while (!(c.equals(ExpressionElementType.PLUS.toString())) &&    //данный цикл обьеденяет символы в единое число до встречи с знаком
-                        !(c.equals(ExpressionElementType.MINUS.toString())) &&
-                                !(c.equals(ExpressionElementType.MULTIPLY.toString())) &&
-                                        !(c.equals(ExpressionElementType.DIVIDE.toString())) &&
-                                          !(c.equals(ExpressionElementType.POWER.toString()))) {
-                    number += c;                            //накапливаем числа
-                    if (i < stringExpression.length() - 1) i++;
-                    else break;
-                    c = "" + stringExpression.charAt(i);
-                }
+            while (!(c.equals(ExpressionElementType.PLUS.toString())) &&    //РґР°РЅРЅС‹Р№ С†РёРєР» РѕР±СЊРµРґРµРЅСЏРµС‚ СЃРёРјРІРѕР»С‹ РІ РµРґРёРЅРѕРµ С‡РёСЃР»Рѕ РґРѕ РІСЃС‚СЂРµС‡Рё СЃ Р·РЅР°РєРѕРј
+                    !(c.equals(ExpressionElementType.MINUS.toString())) &&
+                    !(c.equals(ExpressionElementType.MULTIPLY.toString())) &&
+                    !(c.equals(ExpressionElementType.DIVIDE.toString())) &&
+                    !(c.equals(ExpressionElementType.POWER.toString()))) {
+                number += c;                            //РЅР°РєР°РїР»РёРІР°РµРј С‡РёСЃР»Р°
+                if (i < stringExpression.length() - 1) i++;
+                else break;
+                c = "" + stringExpression.charAt(i);
+            }
 
-                if (number.isEmpty()) {    //если пустой, значит там знак
-                    if (i==stringExpression.length() - 1) {error = true; break;} //знак в последней позиции - ошибка
-                    else if (i==0) {
-                        if (c.equals("+")) sign=0; //если в начале числа "+" то все ок,
-                        if (c.equals("-")) sign=1; //если "-" то отмечаем sign=1
-                        if ((c.equals("*")) || (c.equals("/")) || (c.equals("^"))) {error=true; break;} //иначе ошибка
-                        i++;
-                    }
-                    else {
-                    switch(c) {  //ловим знак операции и помещаем в Expression
+            if (number.isEmpty()) {    //РµСЃР»Рё РїСѓСЃС‚РѕР№, Р·РЅР°С‡РёС‚ С‚Р°Рј Р·РЅР°Рє
+                if (i==stringExpression.length() - 1) {error = true; break;} //Р·РЅР°Рє РІ РїРѕСЃР»РµРґРЅРµР№ РїРѕР·РёС†РёРё - РѕС€РёР±РєР°
+                else if (i==0) {
+                    if (c.equals("+")) sign=0; //РµСЃР»Рё РІ РЅР°С‡Р°Р»Рµ С‡РёСЃР»Р° "+" С‚Рѕ РІСЃРµ РѕРє,
+                    if (c.equals("-")) sign=1; //РµСЃР»Рё "-" С‚Рѕ РѕС‚РјРµС‡Р°РµРј sign=1
+                    if ((c.equals("*")) || (c.equals("/")) || (c.equals("^"))) {error=true; break;} //РёРЅР°С‡Рµ РѕС€РёР±РєР°
+                    i++;
+                }
+                else {
+                    switch(c) {  //Р»РѕРІРёРј Р·РЅР°Рє РѕРїРµСЂР°С†РёРё Рё РїРѕРјРµС‰Р°РµРј РІ Expression
                         case "+":
                             expression.elementSet.add(new ExpressionElement(ExpressionElementType.PLUS)); break;
                         case "-":
@@ -97,29 +97,29 @@ public class Parser implements Observer, Observable {
                         case "^":
                             expression.elementSet.add(new ExpressionElement(ExpressionElementType.POWER)); break;
                     }
-                        switch(stringExpression.charAt(i-1)) { //Ловим ситуацию когда два знака подряд - это ошибка
-                            case '+':
-                            case '-':
-                            case '*':
-                            case '/':
-                            case '^':
-                                error=true;
-                        }
-                        i++;
+                    switch(stringExpression.charAt(i-1)) { //Р›РѕРІРёРј СЃРёС‚СѓР°С†РёСЋ РєРѕРіРґР° РґРІР° Р·РЅР°РєР° РїРѕРґСЂСЏРґ - СЌС‚Рѕ РѕС€РёР±РєР°
+                        case '+':
+                        case '-':
+                        case '*':
+                        case '/':
+                        case '^':
+                            error=true;
                     }
-                } else {  //обрабатываем числа
-                    if (sign==1) number="-"+number; //если знак 1 - значит число отрецательное
-                    sign=0;
-                     expression.elementSet.add(new ExpressionElement(new BigInteger(number)));
-
-                    if ((i == stringExpression.length() - 1)//проверяем на то что последняя позиция - знак - ошибка
-                            && ((stringExpression.charAt(i)=='+')
-                            || (stringExpression.charAt(i)=='-')
-                            || (stringExpression.charAt(i)=='*')
-                            || (stringExpression.charAt(i)=='/')
-                            || (stringExpression.charAt(i)=='^'))) {error=true; break;}
-                    if (i == stringExpression.length() - 1) break;//i++;
+                    i++;
                 }
+            } else {  //РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј С‡РёСЃР»Р°
+                if (sign==1) number="-"+number; //РµСЃР»Рё Р·РЅР°Рє 1 - Р·РЅР°С‡РёС‚ С‡РёСЃР»Рѕ РѕС‚СЂРµС†Р°С‚РµР»СЊРЅРѕРµ
+                sign=0;
+                expression.elementSet.add(new ExpressionElement(new BigInteger(number)));
+
+                if ((i == stringExpression.length() - 1)//РїСЂРѕРІРµСЂСЏРµРј РЅР° С‚Рѕ С‡С‚Рѕ РїРѕСЃР»РµРґРЅСЏСЏ РїРѕР·РёС†РёСЏ - Р·РЅР°Рє - РѕС€РёР±РєР°
+                        && ((stringExpression.charAt(i)=='+')
+                        || (stringExpression.charAt(i)=='-')
+                        || (stringExpression.charAt(i)=='*')
+                        || (stringExpression.charAt(i)=='/')
+                        || (stringExpression.charAt(i)=='^'))) {error=true; break;}
+                if (i == stringExpression.length() - 1) break;//i++;
+            }
         }
 
         //------------------------------

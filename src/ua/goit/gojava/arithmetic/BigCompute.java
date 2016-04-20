@@ -82,7 +82,7 @@ public class BigCompute implements Observer, Observable {
     }
 
     /**
-     * находим индексы кавычек "(" и ")" в списке выражения
+     * находим индексы скобок "(" и ")" в списке выражения
      * результат int[]
      * где result[0] - индекс "(", result[1] - индекс ")"
      * */
@@ -191,7 +191,6 @@ public class BigCompute implements Observer, Observable {
                 return elementSet;
             }
         }
-
         return elementSet;
     }
 

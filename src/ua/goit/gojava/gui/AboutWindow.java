@@ -47,7 +47,7 @@ public class AboutWindow extends JFrame {
                 "\n" +
                 "<div><span style=\"color:#0000FF\"><strong style=\"line-height:1.6em\"><span style=\"font-size:14px\">В составе:</span></strong></span></div>\n" +
                 "\n" +
-                "<div><a href=\"https://www.facebook.com/Alex.Korneyko\" target=\"_blank\"><strong>Александр Корнейко</strong></a> - Концепция, проектирование и общаяя координация. GUI.</div>\n" +
+                "<div><a href=\"https://www.facebook.com/Alex.Korneyko\" target=\"_blank\"><strong>Александр Корнейко</strong></a> - Концепция, проектирование и общая координация. GUI.</div>\n" +
                 "\n" +
                 "<div><a href=\"https://www.facebook.com/anton.petrov.92560\"><strong>Антон Петров</strong></a> - Реализация класса BigInteger</div>\n" +
                 "\n" +

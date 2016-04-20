@@ -136,12 +136,11 @@ public class Parser implements Observer, Observable {
         if (countBrackets != 0) {
             return false;
         }
-
         return true;
     }
 
     /**
-     * правильно расставлены кавычки
+     * правильно расставлены скобки
      * сначала "(" потом ")"
      * */
     private boolean isCorrectRegularityBrackets(char[] charArray) {
@@ -160,7 +159,6 @@ public class Parser implements Observer, Observable {
                 return false;
             }
         }
-
         return true;
     }
 

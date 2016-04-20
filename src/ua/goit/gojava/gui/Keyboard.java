@@ -30,8 +30,6 @@ public class Keyboard extends JPanel implements Observable {
         setVisible(true);
 
         createKeys();
-
-
     }
 
     public void setBuffer(String string){
