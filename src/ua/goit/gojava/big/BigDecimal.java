@@ -1,5 +1,7 @@
 package ua.goit.gojava.big;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Objects;
 
 /**
@@ -9,17 +11,57 @@ public class BigDecimal extends BigNumber {
 
     private BigInteger intPart;
     private BigInteger fractionPart;
+    private int precision = 30;
 
     BigDecimal() {
     }
 
-    BigDecimal(String stringValue){
+    BigDecimal(String stringValue) {
+        this.intPart = parseBigDecimal(stringValue).getIntegerPart();
+        this.fractionPart = parseBigDecimal(stringValue).getFractionPart();
     }
 
-    public BigInteger getIntegerPart(){
+    BigDecimal(BigInteger bigIntegerValue) {
+        this.intPart = bigIntegerValue;
+        this.fractionPart = new BigInteger(0);
+    }
+
+    BigDecimal(int intValue) {
+        this.intPart = new BigInteger(intValue);
+        this.fractionPart = new BigInteger(0);
+    }
+
+
+    BigDecimal(Double doubleValue) {
+        intPart = new BigInteger(doubleValue.intValue());
+        double tempDoubleVal = doubleValue - doubleValue.intValue();
+        StringBuilder stringDoubleValue = new StringBuilder("");
+
+        for (int i = 0; i < precision; i++) {
+            stringDoubleValue.append((int) (tempDoubleVal *= 10));
+            tempDoubleVal = tempDoubleVal - (int) tempDoubleVal;
+        }
+
+        fractionPart = new BigInteger(stringDoubleValue.toString());
+    }
+
+    public BigInteger getIntegerPart() {
         return intPart;
     }
 
+    public BigInteger getFractionPart() {
+        return fractionPart;
+    }
+
+    public int getPrecision() {
+        return precision;
+    }
+
+    public void setPrecision(int precision) {
+        this.precision = precision;
+    }
+
+    @Contract("null -> fail")
     public static BigDecimal parseBigDecimal(String stringValue) throws NumberFormatException {
 
         if (stringValue == null || Objects.equals(stringValue, "")) {
